@@ -15,7 +15,7 @@ class RegionFactory extends Factory
     {
         return [
             'region' => 'Test Region',
-            'environment_type' => EnvironmentType::factory()->create()->getKey(),
+            'environment_type' => 'Forest',
         ];
     }
 }

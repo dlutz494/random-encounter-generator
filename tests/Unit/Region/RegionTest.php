@@ -13,7 +13,7 @@ class RegionTest extends TestCase
 
         $this->assertNotEmpty($region);
         $this->assertNotEmpty($region->region);
-        $this->assertNotEmpty($region->environmentType);
+        $this->assertNotEmpty($region->environment_type);
     }
 
     public function test_the_factory_creates_a_region_without_parent_region(): void
