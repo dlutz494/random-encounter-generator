@@ -13,15 +13,9 @@ class EnemyFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => 'Test Enemy',
-            'statblock' => [
-                'ac' => 10,
-                'hp' => 10,
-                'attack_mod' => '+4',
-                'damage_dice' => '1d8',
-                'damage_mod' => '+2'
-            ],
-            'challenge_rating' => '1/2'
+            'name' => 'Skeleton',
+            'statblock' => 'https://www.dndbeyond.com/monsters/17015-skeleton',
+            'challenge_rating' => '1/4'
         ];
     }
 }

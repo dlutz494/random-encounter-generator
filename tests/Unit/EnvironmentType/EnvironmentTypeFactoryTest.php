@@ -17,13 +17,13 @@ class EnvironmentTypeFactoryTest extends TestCase
 
     public function test_the_factory_creates_an_environment_type_with_values(): void
     {
-        $environmentName = 'Forest';
+        $name = 'Forest';
 
         $environmentType = EnvironmentType::factory()->create([
-            'name' => $environmentName,
+            'name' => $name,
         ]);
 
         $this->assertNotEmpty($environmentType);
-        $this->assertEquals($environmentName, $environmentType->name);
+        $this->assertEquals($name, $environmentType->name);
     }
 }
