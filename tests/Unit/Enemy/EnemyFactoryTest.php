@@ -1,10 +1,10 @@
 <?php
 
-namespace Tests\Unit\EnvironmentType;
+namespace Tests\Unit\Enemy;
 
 use Tests\TestCase;
 
-class EnvironmentTypeTest extends TestCase
+class EnemyFactoryTest extends TestCase
 {
     /**
      * A basic unit test example.

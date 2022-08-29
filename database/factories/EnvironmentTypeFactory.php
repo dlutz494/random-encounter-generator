@@ -13,7 +13,7 @@ class EnvironmentTypeFactory extends Factory
     public function definition(): array
     {
         return [
-            'environment_type' => 'Test Environment',
+            'name' => 'Test Environment',
         ];
     }
 }

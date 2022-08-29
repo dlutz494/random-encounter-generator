@@ -5,7 +5,7 @@ namespace Tests\Unit\Region;
 use App\Models\Region;
 use Tests\TestCase;
 
-class RegionTest extends TestCase
+class RegionFactoryTest extends TestCase
 {
     public function test_the_factory_creates_a_region_with_no_values_given(): void
     {
@@ -28,5 +28,24 @@ class RegionTest extends TestCase
 
         $this->assertNotEmpty($region);
         $this->assertEquals([$region->region, $region->environment_type], [$regionName, $environmentType]);
+    }
+
+    public function test_the_factory_creates_a_region_with_parent_region(): void
+    {
+        $regionName = 'Halcyon Forests';
+        $environmentType = 'Forest';
+        $parentRegion = 'Halcyon';
+
+        $region = Region::factory()->create([
+            'region' => $regionName,
+            'environment_type' => $environmentType,
+            'parent_region' => $parentRegion,
+        ]);
+
+        $this->assertNotEmpty($region);
+        $this->assertEquals(
+            [$region->region, $region->environment_type, $region->parent_region],
+            [$regionName, $environmentType, $parentRegion]
+        );
     }
 }
