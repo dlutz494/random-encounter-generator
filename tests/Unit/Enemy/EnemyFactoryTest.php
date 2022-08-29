@@ -7,7 +7,7 @@ use Tests\TestCase;
 
 class EnemyFactoryTest extends TestCase
 {
-    public function test_the_factory_creates_an_enemy_with_no_values_given(): void
+    public function test_the_factory_creates_an_enemy(): void
     {
         $enemy = Enemy::factory()->create();
 
@@ -17,7 +17,7 @@ class EnemyFactoryTest extends TestCase
         $this->assertNotEmpty($enemy->challenge_rating);
     }
 
-    public function test_the_factory_creates_an_enemy_with_values_given(): void
+    public function test_the_factory_creates_an_enemy_with_values(): void
     {
         $name = 'Zombie';
         $statblock = 'https://www.dndbeyond.com/monsters/17077-zombie';

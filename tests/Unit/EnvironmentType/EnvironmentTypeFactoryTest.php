@@ -7,7 +7,7 @@ use Tests\TestCase;
 
 class EnvironmentTypeFactoryTest extends TestCase
 {
-    public function test_the_factory_creates_a_region_with_no_values_given(): void
+    public function test_the_factory_creates_an_environment_type(): void
     {
         $environmentType = EnvironmentType::factory()->create();
 
@@ -23,7 +23,6 @@ class EnvironmentTypeFactoryTest extends TestCase
             'name' => $name,
         ]);
 
-        $this->assertNotEmpty($environmentType);
         $this->assertEquals($name, $environmentType->name);
     }
 }
