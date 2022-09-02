@@ -6,12 +6,7 @@ use Tests\TestCase;
 
 class EncounterFactoryTest extends TestCase
 {
-    /**
-     * A basic unit test example.
-     *
-     * @return void
-     */
-    public function test_example()
+    public function test_example() : void
     {
         $this->assertTrue(true);
     }

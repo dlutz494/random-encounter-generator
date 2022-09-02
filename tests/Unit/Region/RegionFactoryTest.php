@@ -7,7 +7,7 @@ use Tests\TestCase;
 
 class RegionFactoryTest extends TestCase
 {
-    public function test_the_factory_creates_a_region(): void
+    public function test_the_factory_creates_a_region() : void
     {
         $region = Region::factory()->create();
 
@@ -17,7 +17,7 @@ class RegionFactoryTest extends TestCase
         $this->assertEmpty($region->parent_region);
     }
 
-    public function test_the_factory_creates_a_region_with_values(): void
+    public function test_the_factory_creates_a_region_with_values() : void
     {
         $regionName = 'Halcyon Forests';
         $environmentType = 'Forest';
@@ -35,7 +35,7 @@ class RegionFactoryTest extends TestCase
         );
     }
 
-    public function test_the_factory_creates_a_region_without_parent_region(): void
+    public function test_the_factory_creates_a_region_without_parent_region() : void
     {
         $regionName = 'Halcyon Forests';
         $environmentType = 'Forest';

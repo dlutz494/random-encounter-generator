@@ -7,7 +7,7 @@ use Tests\TestCase;
 
 class EnvironmentTypeFactoryTest extends TestCase
 {
-    public function test_the_factory_creates_an_environment_type(): void
+    public function test_the_factory_creates_an_environment_type() : void
     {
         $environmentType = EnvironmentType::factory()->create();
 
@@ -15,7 +15,7 @@ class EnvironmentTypeFactoryTest extends TestCase
         $this->assertNotEmpty($environmentType->name);
     }
 
-    public function test_the_factory_creates_an_environment_type_with_values(): void
+    public function test_the_factory_creates_an_environment_type_with_values() : void
     {
         $name = 'Forest';
 
