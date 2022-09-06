@@ -9,8 +9,8 @@ class EnemyFactory extends Factory
     public function definition() : array
     {
         return [
-            'name' => 'Skeleton',
-            'statblock' => 'https://www.dndbeyond.com/monsters/17015-skeleton',
+            'name'             => 'Skeleton',
+            'statblock'        => 'https://www.dndbeyond.com/monsters/17015-skeleton',
             'challenge_rating' => '1/4',
         ];
     }
