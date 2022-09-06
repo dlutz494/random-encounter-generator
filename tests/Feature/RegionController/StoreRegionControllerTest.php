@@ -8,7 +8,6 @@ class StoreRegionControllerTest extends TestCase
 {
     public function test_it_returns_a_region_with_name_and_environment() : void
     {
-        $this->markTestSkipped();
         // prepare the parameters for the region to be created
         $regionName = 'Halcyon Forest';
         $regionType = 'Forest';
