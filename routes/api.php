@@ -19,4 +19,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('regions', RegionController::class);
+Route::resource('region', RegionController::class);
+//Route::controller(RegionController::class)->group(function () {
+//    Route::get('/region', 'index');
+//    Route::get('/region/{id}', 'show');
+//});
