@@ -9,8 +9,17 @@ class RegionFactory extends Factory
     public function definition() : array
     {
         return [
-            'region'           => 'Test Region',
+            'name'             => 'Test Region',
             'environment_type' => 'Forest',
         ];
+    }
+
+    public function withParentRegion() : self
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'parent_region' => 'Test Parent Region',
+            ];
+        });
     }
 }

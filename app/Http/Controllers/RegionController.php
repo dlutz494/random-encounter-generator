@@ -27,7 +27,8 @@ class RegionController extends Controller
 
     public function show(Region $region) : RegionResource
     {
-        return Region::findOrFail($region->getKey());
+        $region = Region::findOrFail($region->getKey());
+        return RegionResource::make($region);
     }
 
     public function edit(Region $region) : Response
