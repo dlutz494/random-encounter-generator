@@ -3,8 +3,8 @@
 namespace Tests\Feature\RegionController;
 
 use App\Models\Region;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class IndexRegionControllerTest extends TestCase
 {
@@ -14,11 +14,14 @@ class IndexRegionControllerTest extends TestCase
     {
         Region::factory()->create();
 
-        $this->json('GET', 'api/region')
-            ->assertSuccessful()
-            ->assertJson([[
-                'name' => 'Test Region',
+        $response = $this->json('GET', 'api/region');
+
+        $response->assertSuccessful();
+        $response->assertJson([
+            [
+                'name'             => 'Test Region',
                 'environment_type' => 'Forest',
-            ]]);
+            ],
+        ]);
     }
 }
