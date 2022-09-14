@@ -21,9 +21,9 @@ class RegionController extends Controller
         try {
             Region::create($request->all());
 
-            return new Response('Region stored successfully', 200);
+            return Response('Region stored successfully', 200);
         } catch (Exception $e) {
-            return new Response('An error occurred', 404);
+            return Response('An error occurred', 404);
         }
     }
 
@@ -46,10 +46,14 @@ class RegionController extends Controller
 
     public function update(Request $request, Region $region) : Response
     {
-        $region = Region::findOrFail($region->getKey());
-        $region->update($request->all());
+        try {
+            $region = Region::findOrFail($region->getKey());
+            $region->update($request->all());
 
-        return Response($region, 200);
+            return Response($region, 200);
+        } catch (Exception $e) {
+            return Response('An error occurred', 404);
+        }
     }
 
     public function destroy(Region $region) : Response
