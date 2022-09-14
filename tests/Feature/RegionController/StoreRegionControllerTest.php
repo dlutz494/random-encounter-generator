@@ -57,5 +57,4 @@ class StoreRegionControllerTest extends TestCase
         $response->assertNotFound();
     }
 
-
 }

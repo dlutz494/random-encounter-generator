@@ -10,43 +10,66 @@ class UpdateRegionControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_it_updates_a_region_with_name_and_environment_type() : void
+    public function test_it_updates_a_region() : void
     {
         $region = Region::factory()->create();
-        $newRegionName = 'Update Test';
-        $newRegionType = 'Urban';
+        $payload = [
+            'name'             => 'Update Test',
+            'environment_type' => 'Urban',
+            'parent_region'    => 'Parent Update Test',
+        ];
 
-        $response = $this->json('PUT', 'api/region/'.$region->getKey(), [
-            'name'             => $newRegionName,
-            'environment_type' => $newRegionType,
-        ]);
+        $this->json('PUT', 'api/region/' . $region->getKey(), $payload);
 
-        $response->assertSuccessful();
-        $this->assertDatabaseHas('Regions', [
-            'name'             => $newRegionName,
-            'environment_type' => $newRegionType,
-        ]);
+        $this->assertDatabaseHas('Regions', $payload);
     }
 
-    public function test_it_updates_a_region_with_name_and_environment_type_and_parent_region() : void
+    /**
+     * @dataProvider ProvidesValidPayload
+     */
+    public function test_it_returns_success_with_valid_payloads($payload) : void
     {
         $region = Region::factory()->create();
-        $newRegionName = 'Update Test';
-        $newRegionType = 'Urban';
-        $newRegionParentName = 'Parent Update Test';
 
-        $response = $this->json('PUT', 'api/region/'.$region->getKey(), [
-            'name'             => $newRegionName,
-            'environment_type' => $newRegionType,
-            'parent_region'    => $newRegionParentName,
-        ]);
+        $response = $this->json('PUT', 'api/region/' . $region->getKey(), [$payload]);
 
         $response->assertSuccessful();
-        $this->assertDatabaseHas('Regions', [
-            'name'             => $newRegionName,
-            'environment_type' => $newRegionType,
-            'parent_region'    => $newRegionParentName,
-        ]);
+    }
+
+    public function ProvidesValidPayload() : array
+    {
+        $regionName = 'Store Region';
+        $regionType = 'Desert';
+        $regionParent = 'Parent Store Region';
+
+        return [
+            'Name only'                          => [
+                'name' => $regionName,
+            ],
+            'Environment type only'              => [
+                'environment_type' => $regionType,
+            ],
+            'Parent region only'                 => [
+                'parent_region' => $regionParent,
+            ],
+            'Name and environment type'          => [
+                'name'             => $regionName,
+                'environment_type' => $regionType,
+            ],
+            'Name and parent region'             => [
+                'name'          => $regionName,
+                'parent_region' => $regionParent,
+            ],
+            'Environment type and parent region' => [
+                'environment_type' => $regionType,
+                'parent_region'    => $regionParent,
+            ],
+            'All fields'                         => [
+                'name'             => $regionName,
+                'environment_type' => $regionType,
+                'parent_region'    => $regionParent,
+            ],
+        ];
     }
 
 }
