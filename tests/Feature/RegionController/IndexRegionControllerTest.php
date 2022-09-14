@@ -10,7 +10,7 @@ class IndexRegionControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_it_returns_all_regions() : void
+    public function test_it_returns_a_region() : void
     {
         Region::factory()->create();
 
@@ -23,5 +23,36 @@ class IndexRegionControllerTest extends TestCase
                 'environment_type' => 'Forest',
             ],
         ]);
+    }
+
+    public function test_it_returns_multiple_regions() : void
+    {
+        Region::factory(3)->create();
+
+        $response = $this->json('GET', 'api/region');
+
+        $response->assertSuccessful();
+        $response->assertJson([
+            [
+                'name'             => 'Test Region',
+                'environment_type' => 'Forest',
+            ],
+            [
+                'name'             => 'Test Region',
+                'environment_type' => 'Forest',
+            ],
+            [
+                'name'             => 'Test Region',
+                'environment_type' => 'Forest',
+            ],
+        ]);
+    }
+
+    public function test_it_returns_no_regions() : void
+    {
+        $response = $this->json('GET', 'api/region');
+
+        $response->assertSuccessful();
+        $response->assertJson([]);
     }
 }
