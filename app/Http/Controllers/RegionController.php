@@ -35,12 +35,13 @@ class RegionController extends Controller
     public function show(Region $region) : RegionResource
     {
         $region = Region::findOrFail($region->getKey());
+
         return RegionResource::make($region);
     }
 
     public function edit(Region $region) : Response
     {
-        return new Response();
+        return Response($region, 200);
     }
 
     public function update(Request $request, Region $region) : Response
@@ -48,7 +49,7 @@ class RegionController extends Controller
         $region = Region::findOrFail($region->getKey());
         $region->update($request->all());
 
-        return $region;
+        return Response($region, 200);
     }
 
     public function destroy(Region $region) : Response

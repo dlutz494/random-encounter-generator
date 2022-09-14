@@ -28,9 +28,9 @@ class StoreRegionControllerTest extends TestCase
 
     public function test_it_stores_a_region_with_name_and_environment_type_and_parent_region() : void
     {
-        $regionName = 'Halcyon Forest';
+        $regionName = 'Store Test';
         $regionType = 'Forest';
-        $regionParentName = 'Northern Forests';
+        $regionParentName = 'Parent Store Test';
 
         $response = $this->json('POST', 'api/region', [
             'name'             => $regionName,
@@ -39,11 +39,23 @@ class StoreRegionControllerTest extends TestCase
         ]);
 
         $response->assertSuccessful();
-        $this->assertDatabaseHas('regions', [
+        $this->assertDatabaseHas('Regions', [
             'name'             => $regionName,
             'environment_type' => $regionType,
             'parent_region'    => $regionParentName,
         ]);
     }
+
+    public function test_it_does_not_store_a_region_without_name() : void
+    {
+        $regionType = 'Forest';
+
+        $response = $this->json('POST', 'api/region', [
+            'environment_type' => $regionType,
+        ]);
+
+        $response->assertNotFound();
+    }
+
 
 }
