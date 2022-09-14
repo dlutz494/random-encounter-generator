@@ -19,5 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// https://laravel.com/docs/9.x/controllers#actions-handled-by-resource-controller
-Route::resource('region', RegionController::class);
+Route::apiResource('region', RegionController::class);
