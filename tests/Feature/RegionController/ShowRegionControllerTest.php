@@ -3,8 +3,8 @@
 namespace Tests\Feature\RegionController;
 
 use App\Models\Region;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class ShowRegionControllerTest extends TestCase
 {
@@ -14,16 +14,21 @@ class ShowRegionControllerTest extends TestCase
     {
         $regionName = 'A Region';
         $regionType = 'Desert';
-
         $region = Region::factory()->create([
             'name'             => $regionName,
             'environment_type' => $regionType,
         ]);
 
-        $this->json('GET', 'api/region/' . $region->getKey())
-            ->assertSuccessful()
-            ->assertJson([
+        $response = $this->json('GET', 'api/region/' . $region->getKey());
 
-            ]);
+        $response->assertSuccessful();
+        $response->assertJson(
+            [
+                'data' => [
+                    'name'             => $regionName,
+                    'environment_type' => $regionType,
+                ],
+            ]
+        );
     }
 }
