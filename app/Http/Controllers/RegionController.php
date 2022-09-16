@@ -58,6 +58,12 @@ class RegionController extends Controller
 
     public function destroy(Region $region) : Response
     {
-        return new Response();
+        try {
+            Region::destroy($region->getKey());
+
+            return Response('Region deleted', 200);
+        } catch (Exception $e) {
+            return Response('An error occurred', 404);
+        }
     }
 }
