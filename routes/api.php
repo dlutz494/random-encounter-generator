@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EnvironmentController;
 use App\Http\Controllers\RegionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('region', RegionController::class);
+Route::apiResource('environment', EnvironmentController::class);

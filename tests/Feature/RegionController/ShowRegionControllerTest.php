@@ -15,8 +15,8 @@ class ShowRegionControllerTest extends TestCase
         $regionName = 'A Region';
         $environment = 'Desert';
         $region = Region::factory()->create([
-            'name'             => $regionName,
-            'environment_type' => $environment,
+            'name'        => $regionName,
+            'environment' => $environment,
         ]);
 
         $response = $this->json('GET', 'api/region/' . $region->getKey());
@@ -25,8 +25,8 @@ class ShowRegionControllerTest extends TestCase
         $response->assertJson(
             [
                 'data' => [
-                    'name'             => $regionName,
-                    'environment_type' => $environment,
+                    'name'        => $regionName,
+                    'environment' => $environment,
                 ],
             ]
         );
