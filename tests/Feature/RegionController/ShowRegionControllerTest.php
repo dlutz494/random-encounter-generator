@@ -13,10 +13,10 @@ class ShowRegionControllerTest extends TestCase
     public function test_it_returns_a_region() : void
     {
         $regionName = 'A Region';
-        $regionType = 'Desert';
+        $environment = 'Desert';
         $region = Region::factory()->create([
             'name'             => $regionName,
-            'environment_type' => $regionType,
+            'environment_type' => $environment,
         ]);
 
         $response = $this->json('GET', 'api/region/' . $region->getKey());
@@ -26,7 +26,7 @@ class ShowRegionControllerTest extends TestCase
             [
                 'data' => [
                     'name'             => $regionName,
-                    'environment_type' => $regionType,
+                    'environment_type' => $environment,
                 ],
             ]
         );

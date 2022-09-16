@@ -14,14 +14,14 @@ class UpdateRegionControllerTest extends TestCase
     {
         $region = Region::factory()->create();
         $payload = [
-            'name'             => 'Update Test',
-            'environment_type' => 'Urban',
-            'parent_region'    => 'Parent Update Test',
+            'name'          => 'Update Test',
+            'environment'   => 'Urban',
+            'parent_region' => 'Parent Update Test',
         ];
 
         $this->json('PUT', 'api/region/' . $region->getKey(), $payload);
 
-        $this->assertDatabaseHas('Regions', $payload);
+        $this->assertDatabaseHas('regions', $payload);
     }
 
     /**
@@ -46,28 +46,28 @@ class UpdateRegionControllerTest extends TestCase
             'Name only'                          => [
                 'name' => $regionName,
             ],
-            'Environment type only'              => [
-                'environment_type' => $regionType,
+            'Environment only'              => [
+                'environment' => $regionType,
             ],
             'Parent region only'                 => [
                 'parent_region' => $regionParent,
             ],
-            'Name and environment type'          => [
-                'name'             => $regionName,
-                'environment_type' => $regionType,
+            'Name and environment'          => [
+                'name'        => $regionName,
+                'environment' => $regionType,
             ],
             'Name and parent region'             => [
                 'name'          => $regionName,
                 'parent_region' => $regionParent,
             ],
-            'Environment type and parent region' => [
-                'environment_type' => $regionType,
-                'parent_region'    => $regionParent,
+            'Environment and parent region' => [
+                'environment'   => $regionType,
+                'parent_region' => $regionParent,
             ],
             'All fields'                         => [
-                'name'             => $regionName,
-                'environment_type' => $regionType,
-                'parent_region'    => $regionParent,
+                'name'          => $regionName,
+                'environment'   => $regionType,
+                'parent_region' => $regionParent,
             ],
         ];
     }

@@ -12,46 +12,46 @@ class StoreRegionControllerTest extends TestCase
     public function test_it_stores_a_region_with_name_and_environment_type() : void
     {
         $regionName = 'Store Test';
-        $regionType = 'Forest';
+        $environment = 'Forest';
 
         $response = $this->json('POST', 'api/region', [
-            'name'             => $regionName,
-            'environment_type' => $regionType,
+            'name'        => $regionName,
+            'environment' => $environment,
         ]);
 
         $response->assertSuccessful();
-        $this->assertDatabaseHas('Regions', [
-            'name'             => $regionName,
-            'environment_type' => $regionType,
+        $this->assertDatabaseHas('regions', [
+            'name'        => $regionName,
+            'environment' => $environment,
         ]);
     }
 
     public function test_it_stores_a_region_with_name_and_environment_type_and_parent_region() : void
     {
         $regionName = 'Store Test';
-        $regionType = 'Forest';
+        $environment = 'Forest';
         $regionParentName = 'Parent Store Test';
 
         $response = $this->json('POST', 'api/region', [
-            'name'             => $regionName,
-            'environment_type' => $regionType,
-            'parent_region'    => $regionParentName,
+            'name'          => $regionName,
+            'environment'   => $environment,
+            'parent_region' => $regionParentName,
         ]);
 
         $response->assertSuccessful();
-        $this->assertDatabaseHas('Regions', [
-            'name'             => $regionName,
-            'environment_type' => $regionType,
-            'parent_region'    => $regionParentName,
+        $this->assertDatabaseHas('regions', [
+            'name'          => $regionName,
+            'environment'   => $environment,
+            'parent_region' => $regionParentName,
         ]);
     }
 
     public function test_it_does_not_store_a_region_without_name() : void
     {
-        $regionType = 'Forest';
+        $environment = 'Forest';
 
         $response = $this->json('POST', 'api/region', [
-            'environment_type' => $regionType,
+            'environment' => $environment,
         ]);
 
         $response->assertNotFound();

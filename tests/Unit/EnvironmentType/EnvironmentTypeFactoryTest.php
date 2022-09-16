@@ -2,14 +2,14 @@
 
 namespace Tests\Unit\EnvironmentType;
 
-use App\Models\EnvironmentType;
+use App\Models\Environment;
 use Tests\TestCase;
 
 class EnvironmentTypeFactoryTest extends TestCase
 {
     public function test_the_factory_creates_an_environment_type() : void
     {
-        $environmentType = EnvironmentType::factory()->create();
+        $environmentType = Environment::factory()->create();
 
         $this->assertNotEmpty($environmentType);
         $this->assertNotEmpty($environmentType->name);
@@ -19,7 +19,7 @@ class EnvironmentTypeFactoryTest extends TestCase
     {
         $name = 'Forest';
 
-        $environmentType = EnvironmentType::factory()->create([
+        $environmentType = Environment::factory()->create([
             'name' => $name,
         ]);
 

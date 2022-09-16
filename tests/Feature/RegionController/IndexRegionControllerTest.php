@@ -19,8 +19,8 @@ class IndexRegionControllerTest extends TestCase
         $response->assertSuccessful();
         $response->assertJson([
             [
-                'name'             => $region->name,
-                'environment_type' => $region->environment_type,
+                'name'        => $region->name,
+                'environment' => $region->environment,
             ],
         ]);
     }
@@ -34,9 +34,9 @@ class IndexRegionControllerTest extends TestCase
         $response->assertSuccessful();
         $response->assertJson([
             [
-                'name'             => $region->name,
-                'environment_type' => $region->environment_type,
-                'parent_region'    => $region->parent_region,
+                'name'          => $region->name,
+                'environment'   => $region->environment,
+                'parent_region' => $region->parent_region,
             ],
         ]);
     }
@@ -51,16 +51,16 @@ class IndexRegionControllerTest extends TestCase
         $response->assertSuccessful();
         $response->assertJson([
             [
-                'name'             => $regions[0]->name,
-                'environment_type' => $regions[0]->environment_type,
+                'name'        => $regions[0]->name,
+                'environment' => $regions[0]->environment,
             ],
             [
-                'name'             => $regions[1]->name,
-                'environment_type' => $regions[1]->environment_type,
+                'name'        => $regions[1]->name,
+                'environment' => $regions[1]->environment,
             ],
             [
-                'name'             => $regions[2]->name,
-                'environment_type' => $regions[2]->environment_type,
+                'name'        => $regions[2]->name,
+                'environment' => $regions[2]->environment,
             ],
         ]);
     }

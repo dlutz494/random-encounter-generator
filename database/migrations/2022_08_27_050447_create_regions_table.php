@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('regions', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('environment_type');
+            $table->string('environment');
             $table->string('parent_region')->nullable();
             $table->timestamps();
         });

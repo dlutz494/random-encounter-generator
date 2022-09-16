@@ -16,7 +16,7 @@ class DestroyRegionControllerTest extends TestCase
 
         $this->json('DELETE', 'api/region/' . $region->getKey());
 
-        $this->assertDatabaseMissing('Regions', $region->toArray());
+        $this->assertDatabaseMissing('regions', $region->toArray());
     }
 
 }

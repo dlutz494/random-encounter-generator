@@ -11,7 +11,8 @@ class Region extends Model
 
     protected $fillable = [
         'name',
-        'environment_type',
+        'environment',
         'parent_region',
     ];
+
 }

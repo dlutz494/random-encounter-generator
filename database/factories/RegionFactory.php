@@ -9,8 +9,8 @@ class RegionFactory extends Factory
     public function definition() : array
     {
         return [
-            'name'             => 'Test Region',
-            'environment_type' => 'Forest',
+            'name'        => 'Test Region',
+            'environment' => 'Forest',
         ];
     }
 
