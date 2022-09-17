@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EnemyController;
 use App\Http\Controllers\EnvironmentController;
 use App\Http\Controllers\RegionController;
 use Illuminate\Http\Request;
@@ -22,3 +23,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResource('region', RegionController::class);
 Route::apiResource('environment', EnvironmentController::class);
+Route::apiResource('enemy', EnemyController::class);
