@@ -42,10 +42,9 @@ class EnvironmentController extends Controller
         return Response($environment, 200);
     }
 
-    public function update(Request $request, Environment $oldEnvironment) : Response
+    public function update(Request $request, Environment $environment) : Response
     {
         try {
-            $environment = Environment::findOrFail($oldEnvironment->getKey());
             $environment->update($request->all());
 
             return Response($environment, 200);

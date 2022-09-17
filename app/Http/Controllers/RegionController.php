@@ -42,10 +42,9 @@ class RegionController extends Controller
         return Response($region, 200);
     }
 
-    public function update(Request $request, Region $oldRegion) : Response
+    public function update(Request $request, Region $region) : Response
     {
         try {
-            $region = Region::findOrFail($oldRegion->getKey());
             $region->update($request->all());
 
             return Response($region, 200);
