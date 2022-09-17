@@ -2,9 +2,9 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class EnvironmentResource extends JsonResource
+class EnvironmentResource extends ResourceCollection
 {
     public function toArray($request) : array
     {
