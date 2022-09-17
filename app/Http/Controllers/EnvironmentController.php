@@ -27,16 +27,14 @@ class EnvironmentController extends Controller
         }
     }
 
-    public function create()
+    public function create() : Response
     {
-        //
+        return Response('Empty Route', 200);
     }
 
     public function show(Environment $environment) : EnvironmentResource
     {
-        $environment = Environment::findOrFail($environment->getKey());
-
-        return EnvironmentResource::make($environment);
+        return EnvironmentResource::make(Environment::findOrFail($environment->getKey()));
     }
 
     public function edit(Environment $environment) : Response
@@ -44,10 +42,10 @@ class EnvironmentController extends Controller
         return Response($environment, 200);
     }
 
-    public function update(Request $request, Environment $environment) : Response
+    public function update(Request $request, Environment $oldEnvironment) : Response
     {
         try {
-            $environment = Environment::findOrFail($environment->getKey());
+            $environment = Environment::findOrFail($oldEnvironment->getKey());
             $environment->update($request->all());
 
             return Response($environment, 200);

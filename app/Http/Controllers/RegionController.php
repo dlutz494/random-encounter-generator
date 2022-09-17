@@ -27,16 +27,14 @@ class RegionController extends Controller
         }
     }
 
-    public function create()
+    public function create() : Response
     {
-        //
+        return Response('Empty Route', 200);
     }
 
     public function show(Region $region) : RegionResource
     {
-        $region = Region::findOrFail($region->getKey());
-
-        return RegionResource::make($region);
+        return RegionResource::make(Region::findOrFail($region->getKey()));
     }
 
     public function edit(Region $region) : Response
@@ -44,10 +42,10 @@ class RegionController extends Controller
         return Response($region, 200);
     }
 
-    public function update(Request $request, Region $region) : Response
+    public function update(Request $request, Region $oldRegion) : Response
     {
         try {
-            $region = Region::findOrFail($region->getKey());
+            $region = Region::findOrFail($oldRegion->getKey());
             $region->update($request->all());
 
             return Response($region, 200);
