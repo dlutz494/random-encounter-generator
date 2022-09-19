@@ -9,6 +9,10 @@ class Enemy extends Model
 {
     use HasFactory;
 
+    protected string $name;
+    protected string $statblock;
+    protected string $challenge_rating;
+
     protected $fillable = [
         'name',
         'statblock',
