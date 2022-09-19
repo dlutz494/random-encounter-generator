@@ -16,14 +16,25 @@ class EnemyController extends Controller
         return Enemy::all();
     }
 
+    public function store(Request $request) : Response
+    {
+        try {
+            $request->validate([
+                'name'      => 'required|string',
+                'statblock' => 'required|string',
+            ]);
+
+            Enemy::create($request->all());
+
+            return Response('Enemy stored successfully', 200);
+        } catch (Exception $e) {
+            return Response('An error occurred', 404);
+        }
+    }
+
     public function create() : Response
     {
         return Response('Empty Route', 200);
-    }
-
-    public function store(Request $request) : Response
-    {
-        return Response('Enemy stored successfully');
     }
 
     public function show(Enemy $enemy) : EnemyResource
@@ -36,10 +47,9 @@ class EnemyController extends Controller
         return Response($enemy, 200);
     }
 
-    public function update(Request $request, Enemy $oldEnemy) : Response
+    public function update(Request $request, Enemy $enemy) : Response
     {
         try {
-            $enemy = Enemy::findOrFail($oldEnemy->getKey());
             $enemy->update($request->all());
 
             return Response($enemy, 200);
