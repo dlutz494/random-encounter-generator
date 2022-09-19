@@ -20,8 +20,9 @@ class EnemyController extends Controller
     {
         try {
             $request->validate([
-                'name'      => 'required|string',
-                'statblock' => 'required|string',
+                'name'             => 'required|unique:enemies|string',
+                'statblock'        => 'required|string',
+                'challenge_rating' => 'required|string',
             ]);
 
             Enemy::create($request->all());
@@ -50,6 +51,12 @@ class EnemyController extends Controller
     public function update(Request $request, Enemy $enemy) : Response
     {
         try {
+            $request->validate([
+                'name'             => 'string|unique:enemies|nullable',
+                'statblock'        => 'string|nullable',
+                'challenge_rating' => 'string|nullable',
+            ]);
+
             $enemy->update($request->all());
 
             return Response($enemy, 200);
