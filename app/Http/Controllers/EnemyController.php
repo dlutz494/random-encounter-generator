@@ -39,7 +39,7 @@ class EnemyController extends Controller
 
     public function show(Enemy $enemy) : EnemyResource
     {
-        return EnemyResource::make(Enemy::findOrFail($enemy->getKey()));
+        return EnemyResource::make($enemy);
     }
 
     public function edit(Enemy $enemy) : Response

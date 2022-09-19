@@ -13,8 +13,8 @@ class ShowEnemyControllerTest extends TestCase
     public function test_it_returns_an_enemy() : void
     {
         $name = 'Show Enemy';
-        $statblock = 'www.dndbeyond.com';
-        $challenge_rating = '2';
+        $statblock = 'www.dndbeyond.com/show';
+        $challenge_rating = '1';
         $enemy = Enemy::factory()->create([
             'name'             => $name,
             'statblock'        => $statblock,
