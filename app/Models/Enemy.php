@@ -12,6 +12,6 @@ class Enemy extends Model
     protected $fillable = [
         'name',
         'statblock',
-        'challenge_rating'
+        'challenge_rating',
     ];
 }
