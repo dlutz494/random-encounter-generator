@@ -25,7 +25,7 @@ class UpdateEnemyControllerTest extends TestCase
         $this->assertDatabaseHas('enemies', $payload);
     }
 
-    public function test_it_returns_404_with_duplicate_name() : void
+    public function test_it_returns_400_with_duplicate_name() : void
     {
         $name = 'Update Test';
         Enemy::factory()->create([
@@ -35,67 +35,129 @@ class UpdateEnemyControllerTest extends TestCase
 
         $response = $this->json('PUT', 'api/enemy/' . $enemy->getKey(), ['name' => $name]);
 
-        $response->assertNotFound();
+        $response->assertStatus(400);
+        $response->assertSee('The name has already been taken.');
     }
 
     /**
-     * @dataProvider ProvidesValidPayload
+     * @dataProvider ProvidesValidPayloads
      */
     public function test_it_returns_success_with_valid_payloads($payload) : void
     {
         $enemy = Enemy::factory()->create();
 
-        $response = $this->json('PUT', 'api/enemy/' . $enemy->getKey(), [$payload]);
+        $response = $this->json('PUT', 'api/enemy/' . $enemy->getKey(), $payload);
 
         $response->assertSuccessful();
     }
 
-    public function test_it_returns_404_with_invalid_fields() : void
+    /**
+     * @dataProvider ProvidesInvalidPayloads
+     */
+    public function test_it_returns_400_with_invalid_payloads($payload, $errors) : void
     {
         $enemy = Enemy::factory()->create();
-        $payload = [
-            'name'             => 123,
-            'statblock'        => 123,
-            'challenge_rating' => 123,
-        ];
 
         $response = $this->json('PUT', 'api/enemy/' . $enemy->getKey(), $payload);
 
-        $response->assertNotFound();
+        $response->assertStatus(400)->assertSee($errors);
     }
 
-    public function ProvidesValidPayload() : array
+    public function ProvidesInvalidPayloads() : array
+    {
+        $validName = 'Update Enemy';
+        $validStatblock = 'www.dndbeyond.com/update';
+        $validChallengeRating = '1';
+        return [
+            'Name is an integer'             => [
+                'payload' => [
+                    'name'             => 123,
+                    'statblock'        => $validStatblock,
+                    'challenge_rating' => $validChallengeRating,
+                ],
+                'errors'  => [
+                    'The name must be a string',
+                ],
+            ],
+            'Statblock is an integer'        => [
+                'payload' => [
+                    'name'             => $validName,
+                    'statblock'        => 123,
+                    'challenge_rating' => $validChallengeRating,
+                ],
+                'errors'  => [
+                    'The statblock must be a string',
+                ],
+            ],
+            'Challenge Rating is an integer' => [
+                'payload' => [
+                    'name'             => $validName,
+                    'statblock'        => $validStatblock,
+                    'challenge_rating' => 123,
+                ],
+                'errors'  => [
+                    'The challenge rating must be a string',
+                ],
+            ],
+            'All fields are integers'        => [
+                'payload' => [
+                    'name'             => 123,
+                    'statblock'        => 123,
+                    'challenge_rating' => 123,
+                ],
+                'errors'  => [
+                    'The name must be a string. (and 2 more errors)',
+                ],
+            ],
+        ];
+    }
+
+    public function ProvidesValidPayloads() : array
     {
         $name = 'Update enemy';
         $statblock = 'www.dndbeyond.com/update';
-        $challenge_rating = '1';
+        $challengeRating = '1';
 
         return [
             'Name only'                      => [
-                'name' => $name,
+                'payload' => [
+                    'name' => $name,
+                ],
             ],
             'Statblock only'                 => [
-                'statblock' => $statblock,
+                'payload' => [
+                    'statblock' => $statblock,
+                ],
             ],
             'Challenge Rating only'          => [
-                'challenge_rating' => $challenge_rating,
+                'payload' => [
+                    'challenge_rating' => $challengeRating,
+                ],
             ],
             'Name and Statblock'             => [
-                'name'      => $name,
-                'statblock' => $statblock,
+                'payload' => [
+                    'name'      => $name,
+                    'statblock' => $statblock,
+                ],
             ],
             'Name and Challenge Rating'      => [
-                'name'             => $name,
-                'challenge_rating' => $challenge_rating,
+                'payload' => [
+                    'name'             => $name,
+                    'challenge_rating' => $challengeRating,
+                ],
             ],
             'Statblock and Challenge Rating' => [
-                'name'      => $name,
-                'statblock' => $statblock,
+                'payload' => [
+                    'name'      => $name,
+                    'statblock' => $statblock,
+                ],
             ],
             'All fields'                     => [
-                'name'             => $name,
-                'statblock'        => $statblock,
-                'challenge_rating' => $challenge_rating,
+                'payload' => [
+                    'name'             => $name,
+                    'statblock'        => $statblock,
+                    'challenge_rating' => $challengeRating,
+                ],
             ],
         ];
     }
