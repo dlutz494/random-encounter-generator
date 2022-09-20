@@ -19,4 +19,9 @@ class DestroyRegionControllerTest extends TestCase
         $this->assertDatabaseMissing('regions', $region->toArray());
     }
 
+    public function test_it_returns_405_without_an_id() : void
+    {
+        $this->json('DELETE', 'api/region/')->assertStatus(405);
+    }
+
 }

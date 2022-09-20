@@ -19,4 +19,9 @@ class DestroyEnvironmentControllerTest extends TestCase
         $this->assertDatabaseMissing('environments', $environment->toArray());
     }
 
+    public function test_it_returns_405_without_an_id() : void
+    {
+        $this->json('DELETE', 'api/environment/')->assertStatus(405);
+    }
+
 }
