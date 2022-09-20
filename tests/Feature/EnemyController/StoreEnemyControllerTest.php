@@ -39,7 +39,7 @@ class StoreEnemyControllerTest extends TestCase
             'challenge_rating' => $challengeRating,
         ]);
 
-        $response->assertNotFound();
+        $response->assertUnprocessable();
     }
 
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreEnemyRequest;
 use App\Http\Requests\UpdateEnemyRequest;
 use App\Http\Resources\EnemyResource;
 use App\Models\Enemy;
@@ -18,15 +19,9 @@ class EnemyController extends Controller
         return Enemy::all();
     }
 
-    public function store(Request $request) : Response
+    public function store(StoreEnemyRequest $request) : Response
     {
         try {
-            $request->validate([
-                'name'             => 'required|unique:enemies|string',
-                'statblock'        => 'required|string',
-                'challenge_rating' => 'required|string',
-            ]);
-
             Enemy::create($request->all());
 
             return Response('Enemy stored successfully', 200);
