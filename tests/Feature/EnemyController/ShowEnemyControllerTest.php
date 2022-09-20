@@ -14,11 +14,11 @@ class ShowEnemyControllerTest extends TestCase
     {
         $name = 'Show Enemy';
         $statblock = 'www.dndbeyond.com/show';
-        $challenge_rating = '1';
+        $challengeRating = '1';
         $enemy = Enemy::factory()->create([
             'name'             => $name,
             'statblock'        => $statblock,
-            'challenge_rating' => $challenge_rating,
+            'challenge_rating' => $challengeRating,
         ]);
 
         $response = $this->json('GET', 'api/enemy/' . $enemy->getKey());
@@ -29,7 +29,7 @@ class ShowEnemyControllerTest extends TestCase
                 'data' => [
                     'name'             => $name,
                     'statblock'        => $statblock,
-                    'challenge_rating' => $challenge_rating,
+                    'challenge_rating' => $challengeRating,
                 ],
             ]
         );

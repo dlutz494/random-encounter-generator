@@ -13,30 +13,30 @@ class StoreEnemyControllerTest extends TestCase
     {
         $name = 'Store Test';
         $statblock = 'www.dndbeyond.com';
-        $challenge_rating = '1';
+        $challengeRating = '1';
 
         $response = $this->json('POST', 'api/enemy', [
             'name'             => $name,
             'statblock'        => $statblock,
-            'challenge_rating' => $challenge_rating,
+            'challenge_rating' => $challengeRating,
         ]);
 
         $response->assertSuccessful();
         $this->assertDatabaseHas('enemies', [
             'name'             => $name,
             'statblock'        => $statblock,
-            'challenge_rating' => $challenge_rating,
+            'challenge_rating' => $challengeRating,
         ]);
     }
 
     public function test_it_does_not_store_an_enemy_without_a_name() : void
     {
         $statblock = 'www.dndbeyond.com';
-        $challenge_rating = '1';
+        $challengeRating = '1';
 
         $response = $this->json('POST', 'api/enemy', [
             'statblock'        => $statblock,
-            'challenge_rating' => $challenge_rating,
+            'challenge_rating' => $challengeRating,
         ]);
 
         $response->assertNotFound();
