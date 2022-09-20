@@ -8,6 +8,7 @@ use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
 
 class EnemyController extends Controller
 {
@@ -60,6 +61,8 @@ class EnemyController extends Controller
             $enemy->update($request->all());
 
             return Response($enemy, 200);
+        } catch (ValidationException $e) {
+            return Response($e->getMessage(), 400);
         } catch (Exception $e) {
             return Response('An error occurred', 404);
         }
