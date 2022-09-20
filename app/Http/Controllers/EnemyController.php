@@ -25,6 +25,8 @@ class EnemyController extends Controller
             Enemy::create($request->all());
 
             return Response('Enemy stored successfully', 200);
+        } catch (ValidationException $e) {
+            return Response($e->getMessage());
         } catch (Exception $e) {
             return Response('An error occurred', 404);
         }

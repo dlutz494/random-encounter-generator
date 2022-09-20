@@ -63,6 +63,56 @@ class UpdateEnemyControllerTest extends TestCase
         $response->assertUnprocessable()->assertSee($errors);
     }
 
+    public function ProvidesValidPayloads() : array
+    {
+        $name = 'Update enemy';
+        $statblock = 'www.dndbeyond.com/update';
+        $challengeRating = '1';
+
+        return [
+            'Name only'                      => [
+                'payload' => [
+                    'name' => $name,
+                ],
+            ],
+            'Statblock only'                 => [
+                'payload' => [
+                    'statblock' => $statblock,
+                ],
+            ],
+            'Challenge rating only'          => [
+                'payload' => [
+                    'challenge_rating' => $challengeRating,
+                ],
+            ],
+            'Name and Statblock'             => [
+                'payload' => [
+                    'name'      => $name,
+                    'statblock' => $statblock,
+                ],
+            ],
+            'Name and Challenge Rating'      => [
+                'payload' => [
+                    'name'             => $name,
+                    'challenge_rating' => $challengeRating,
+                ],
+            ],
+            'Statblock and Challenge Rating' => [
+                'payload' => [
+                    'name'      => $name,
+                    'statblock' => $statblock,
+                ],
+            ],
+            'All fields'                     => [
+                'payload' => [
+                    'name'             => $name,
+                    'statblock'        => $statblock,
+                    'challenge_rating' => $challengeRating,
+                ],
+            ],
+        ];
+    }
+
     public function ProvidesInvalidPayloads() : array
     {
         $validName = 'Update Enemy';
@@ -107,56 +157,6 @@ class UpdateEnemyControllerTest extends TestCase
                 ],
                 'errors'  => [
                     'The name must be a string. (and 2 more errors)',
-                ],
-            ],
-        ];
-    }
-
-    public function ProvidesValidPayloads() : array
-    {
-        $name = 'Update enemy';
-        $statblock = 'www.dndbeyond.com/update';
-        $challengeRating = '1';
-
-        return [
-            'Name only'                      => [
-                'payload' => [
-                    'name' => $name,
-                ],
-            ],
-            'Statblock only'                 => [
-                'payload' => [
-                    'statblock' => $statblock,
-                ],
-            ],
-            'Challenge Rating only'          => [
-                'payload' => [
-                    'challenge_rating' => $challengeRating,
-                ],
-            ],
-            'Name and Statblock'             => [
-                'payload' => [
-                    'name'      => $name,
-                    'statblock' => $statblock,
-                ],
-            ],
-            'Name and Challenge Rating'      => [
-                'payload' => [
-                    'name'             => $name,
-                    'challenge_rating' => $challengeRating,
-                ],
-            ],
-            'Statblock and Challenge Rating' => [
-                'payload' => [
-                    'name'      => $name,
-                    'statblock' => $statblock,
-                ],
-            ],
-            'All fields'                     => [
-                'payload' => [
-                    'name'             => $name,
-                    'statblock'        => $statblock,
-                    'challenge_rating' => $challengeRating,
                 ],
             ],
         ];
