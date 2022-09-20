@@ -25,7 +25,7 @@ class UpdateEnemyControllerTest extends TestCase
         $this->assertDatabaseHas('enemies', $payload);
     }
 
-    public function test_it_returns_400_with_duplicate_name() : void
+    public function test_it_returns_unprocessable_with_duplicate_name() : void
     {
         $name = 'Update Test';
         Enemy::factory()->create([
@@ -54,7 +54,7 @@ class UpdateEnemyControllerTest extends TestCase
     /**
      * @dataProvider ProvidesInvalidPayloads
      */
-    public function test_it_returns_400_with_invalid_payloads($payload, $errors) : void
+    public function test_it_returns_unprocessable_with_invalid_payloads($payload, $errors) : void
     {
         $enemy = Enemy::factory()->create();
 
