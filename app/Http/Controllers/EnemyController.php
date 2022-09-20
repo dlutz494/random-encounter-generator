@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateEnemyRequest;
 use App\Http\Resources\EnemyResource;
 use App\Models\Enemy;
 use Exception;
@@ -49,22 +50,16 @@ class EnemyController extends Controller
         return Response($enemy, 200);
     }
 
-    public function update(Request $request, Enemy $enemy) : Response
+    public function update(UpdateEnemyRequest $request, Enemy $enemy) : Response
     {
         try {
-            $request->validate([
-                'name'             => 'string|unique:enemies|nullable',
-                'statblock'        => 'string|nullable',
-                'challenge_rating' => 'string|nullable',
-            ]);
-
             $enemy->update($request->all());
 
             return Response($enemy, 200);
         } catch (ValidationException $e) {
-            return Response($e->getMessage(), 400);
+            return Response($e->getMessage());
         } catch (Exception $e) {
-            return Response('An error occurred', 404);
+            return Response('An unknown error occurred', 404);
         }
     }
 

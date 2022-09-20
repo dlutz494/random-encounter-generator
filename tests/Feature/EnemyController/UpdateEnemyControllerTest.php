@@ -35,7 +35,7 @@ class UpdateEnemyControllerTest extends TestCase
 
         $response = $this->json('PUT', 'api/enemy/' . $enemy->getKey(), ['name' => $name]);
 
-        $response->assertStatus(400);
+        $response->assertUnprocessable();
         $response->assertSee('The name has already been taken.');
     }
 
@@ -60,7 +60,7 @@ class UpdateEnemyControllerTest extends TestCase
 
         $response = $this->json('PUT', 'api/enemy/' . $enemy->getKey(), $payload);
 
-        $response->assertStatus(400)->assertSee($errors);
+        $response->assertUnprocessable()->assertSee($errors);
     }
 
     public function ProvidesInvalidPayloads() : array
