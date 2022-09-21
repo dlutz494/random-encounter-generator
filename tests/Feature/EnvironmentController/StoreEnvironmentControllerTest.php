@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\EnvironmentController;
 
-use App\Models\Environment;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
