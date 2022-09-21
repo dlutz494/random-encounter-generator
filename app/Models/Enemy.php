@@ -13,6 +13,8 @@ class Enemy extends Model
     protected string $statblock;
     protected string $challenge_rating;
 
+    protected $table = 'enemies';
+
     protected $fillable = [
         'name',
         'statblock',

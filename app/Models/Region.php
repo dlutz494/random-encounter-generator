@@ -9,6 +9,12 @@ class Region extends Model
 {
     use HasFactory;
 
+    protected string $name;
+    protected string $environment;
+    protected string $parent_region;
+
+    protected $table = 'regions';
+
     protected $fillable = [
         'name',
         'environment',
