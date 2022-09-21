@@ -14,7 +14,7 @@ class UpdateEnvironmentRequest extends FormRequest
     public function rules() : array
     {
         return [
-            'name' => 'required|unique:environments|string',
+            'name' => 'unique:environments|string',
         ];
     }
 }
