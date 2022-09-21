@@ -10,16 +10,24 @@ class UpdateRegionControllerTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected Region $region;
+
+    protected function setUp() : void
+    {
+        parent::setUp();
+
+        $this->region = Region::factory()->create();
+    }
+
     public function test_it_updates_a_region() : void
     {
-        $region = Region::factory()->create();
         $payload = [
             'name'          => 'Update Test',
             'environment'   => 'Urban',
             'parent_region' => 'Parent Update Test',
         ];
 
-        $this->json('PUT', 'api/region/' . $region->getKey(), $payload);
+        $this->json('PUT', 'api/region/' . $this->region->getKey(), $payload);
 
         $this->assertDatabaseHas('regions', $payload);
     }
@@ -29,9 +37,7 @@ class UpdateRegionControllerTest extends TestCase
      */
     public function test_it_returns_success_with_valid_payloads($payload) : void
     {
-        $region = Region::factory()->create();
-
-        $response = $this->json('PUT', 'api/region/' . $region->getKey(), [$payload]);
+        $response = $this->json('PUT', 'api/region/' . $this->region->getKey(), [$payload]);
 
         $response->assertSuccessful();
     }

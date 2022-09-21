@@ -10,16 +10,24 @@ class UpdateEnemyControllerTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected Enemy $enemy;
+
+    protected function setUp() : void
+    {
+        parent::setUp();
+
+        $this->enemy = Enemy::factory()->create();
+    }
+
     public function test_it_updates_a_enemy() : void
     {
-        $enemy = Enemy::factory()->create();
         $payload = [
             'name'             => 'Update Test',
             'statblock'        => 'www.dndbeyond.com',
             'challenge_rating' => '1',
         ];
 
-        $response = $this->json('PUT', 'api/enemy/' . $enemy->getKey(), $payload);
+        $response = $this->json('PUT', 'api/enemy/' . $this->enemy->getKey(), $payload);
 
         $response->assertSuccessful();
         $this->assertDatabaseHas('enemies', $payload);
@@ -31,9 +39,8 @@ class UpdateEnemyControllerTest extends TestCase
         Enemy::factory()->create([
             'name' => $name,
         ]);
-        $enemy = Enemy::factory()->create();
 
-        $response = $this->json('PUT', 'api/enemy/' . $enemy->getKey(), ['name' => $name]);
+        $response = $this->json('PUT', 'api/enemy/' . $this->enemy->getKey(), ['name' => $name]);
 
         $response->assertUnprocessable();
         $response->assertSee('The name has already been taken.');
@@ -44,9 +51,7 @@ class UpdateEnemyControllerTest extends TestCase
      */
     public function test_it_returns_success_with_valid_payloads($payload) : void
     {
-        $enemy = Enemy::factory()->create();
-
-        $response = $this->json('PUT', 'api/enemy/' . $enemy->getKey(), $payload);
+        $response = $this->json('PUT', 'api/enemy/' . $this->enemy->getKey(), $payload);
 
         $response->assertSuccessful();
     }
@@ -56,9 +61,7 @@ class UpdateEnemyControllerTest extends TestCase
      */
     public function test_it_returns_unprocessable_with_invalid_payloads($payload, $errors) : void
     {
-        $enemy = Enemy::factory()->create();
-
-        $response = $this->json('PUT', 'api/enemy/' . $enemy->getKey(), $payload);
+        $response = $this->json('PUT', 'api/enemy/' . $this->enemy->getKey(), $payload);
 
         $response->assertUnprocessable()->assertSee($errors);
     }
