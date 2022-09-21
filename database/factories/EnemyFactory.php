@@ -14,4 +14,13 @@ class EnemyFactory extends Factory
             'challenge_rating' => '1/4',
         ];
     }
+
+    public function withUniqueName() : self
+    {
+        return $this->state(function () {
+            return [
+                'name' => $this->faker->unique()->name,
+            ];
+        });
+    }
 }

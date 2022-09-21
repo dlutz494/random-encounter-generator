@@ -28,7 +28,7 @@ class IndexEnemyControllerTest extends TestCase
 
     public function test_it_returns_multiple_enemies() : void
     {
-        $enemy = Enemy::factory(3)->create();
+        $enemy = Enemy::factory(3)->withUniqueName()->create();
 
         $response = $this->json('GET', 'api/enemy');
 
