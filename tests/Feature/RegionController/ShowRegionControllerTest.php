@@ -31,4 +31,30 @@ class ShowRegionControllerTest extends TestCase
             ]
         );
     }
+
+    public function test_it_returns_a_region_with_parent_region() : void
+    {
+        $regionName = 'A Region';
+        $environment = 'Desert';
+        $parentRegion = 'A Parent Region';
+        $region = Region::factory()->create([
+            'name'          => $regionName,
+            'environment'   => $environment,
+            'parent_region' => $parentRegion,
+        ]);
+
+        $response = $this->json('GET', 'api/region/' . $region->getKey());
+
+        $response->assertSuccessful();
+        $response->assertJson(
+            [
+                'data' => [
+                    'name'          => $regionName,
+                    'environment'   => $environment,
+                    'parent_region' => $parentRegion,
+                ],
+            ]
+        );
+    }
+
 }
