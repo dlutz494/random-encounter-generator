@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\RegionController;
 
+use App\Models\Environment;
 use App\Models\Region;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -9,6 +10,20 @@ use Tests\TestCase;
 class StoreRegionControllerTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected int $environmentId = 1;
+    protected int $parentRegionId = 1;
+
+    protected function setUp() : void
+    {
+        parent::setUp();
+        Environment::factory()->create([
+            'id' => $this->environmentId
+        ]);
+        Region::factory()->create([
+            'id' => $this->parentRegionId
+        ]);
+    }
 
     /**
      * @dataProvider ProvidesValidRegions
@@ -46,8 +61,8 @@ class StoreRegionControllerTest extends TestCase
     public function ProvidesValidRegions() : array
     {
         $validName = 'A Region';
-        $validEnvironment = 'An Environment';
-        $validParentRegion = 'A Parent Region';
+        $validEnvironment = $this->environmentId;
+        $validParentRegion = $this->parentRegionId;
 
         return [
             'Region with all fields'       => [
@@ -69,8 +84,8 @@ class StoreRegionControllerTest extends TestCase
     public function ProvidesInvalidRegions() : array
     {
         $validName = 'A Region';
-        $validEnvironment = 1;
-        $validParentRegion = 1;
+        $validEnvironment = $this->environmentId;
+        $validParentRegion = $this->parentRegionId;
 
         return [
             'Region with no Name'       => [
