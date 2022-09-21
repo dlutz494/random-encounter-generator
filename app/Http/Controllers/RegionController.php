@@ -25,7 +25,7 @@ class RegionController extends Controller
 
             return Response('Region stored successfully', 200);
         } catch (ValidationException $e) {
-            return Response($e->getMessage());
+            return Response($e->errors);
         } catch (Exception $e) {
             return Response('An error occurred', 404);
         }

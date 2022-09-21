@@ -15,8 +15,8 @@ class UpdateRegionRequest extends FormRequest
     {
         return [
             'name'          => 'string|unique:regions',
-            'environment'   => 'string',
-            'parent_region' => 'nullable|string',
+            'environment'   => 'numeric|exists:environments,id',
+            'parent_region' => 'nullable|numeric|exists:regions,id',
         ];
     }
 }

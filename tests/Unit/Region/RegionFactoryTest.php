@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Region;
 
+use App\Models\Environment;
 use App\Models\Region;
 use Tests\TestCase;
 
@@ -30,25 +31,25 @@ class RegionFactoryTest extends TestCase
     public function test_the_factory_creates_a_region_with_values() : void
     {
         $regionName = 'Halcyon Forests';
-        $environment = 'Forest';
-        $parentRegion = 'Halcyon';
+        $environment = Environment::factory()->create();
+        $parentRegion = Region::factory()->create();
 
         $region = Region::factory()->make([
-            'name'             => $regionName,
-            'environment_type' => $environment,
-            'parent_region'    => $parentRegion,
+            'name'          => $regionName,
+            'environment_id'   => $environment->getKey(),
+            'parent_region' => $parentRegion->getKey(),
         ]);
 
         $this->assertEquals(
             [
                 $region->name,
-                $region->environment,
+                $region->environment_id,
                 $region->parent_region,
             ],
             [
                 $regionName,
-                $environment,
-                $parentRegion,
+                $environment->getKey(),
+                $parentRegion->getKey(),
             ]
         );
     }
@@ -56,7 +57,7 @@ class RegionFactoryTest extends TestCase
     public function test_the_factory_creates_a_region_without_parent_region() : void
     {
         $regionName = 'Halcyon Forests';
-        $environment = 'Forest';
+        $environment = Environment::factory()->create();
 
         $region = Region::factory()->create([
             'name'        => $regionName,
@@ -64,7 +65,7 @@ class RegionFactoryTest extends TestCase
         ]);
 
         $this->assertNotEmpty($region);
-        $this->assertEquals([$region->name, $region->environment], [$regionName, $environment]);
+        $this->assertEquals([$region->name, $region->environment], [$regionName, $environment->getKey()]);
         $this->assertEmpty($region->parent_region);
     }
 }

@@ -25,7 +25,7 @@ class IndexRegionControllerTest extends TestCase
         ]);
     }
 
-    public function test_it_returns_a_region_with_parent_region() : void
+    public function test_it_returns_two_regions_with_parent_region() : void
     {
         $region = Region::factory()->withParentRegion()->create();
 
@@ -33,6 +33,10 @@ class IndexRegionControllerTest extends TestCase
 
         $response->assertSuccessful();
         $response->assertJson([
+            [
+                'name'        => Region::find($region->parent_region)->name,
+                'environment' => Region::find($region->parent_region)->environment,
+            ],
             [
                 'name'          => $region->name,
                 'environment'   => $region->environment,
@@ -44,7 +48,7 @@ class IndexRegionControllerTest extends TestCase
 
     public function test_it_returns_multiple_regions() : void
     {
-        $regions = Region::factory(3)->create();
+        $regions = Region::factory(3)->withUniqueName()->create();
 
         $response = $this->json('GET', 'api/region');
 

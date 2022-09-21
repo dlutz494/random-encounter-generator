@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\RegionController;
 
+use App\Models\Environment;
 use App\Models\Region;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -13,10 +14,10 @@ class ShowRegionControllerTest extends TestCase
     public function test_it_returns_a_region() : void
     {
         $regionName = 'A Region';
-        $environment = 'Desert';
+        $environment = Environment::factory()->create();
         $region = Region::factory()->create([
             'name'        => $regionName,
-            'environment' => $environment,
+            'environment' => $environment->getKey(),
         ]);
 
         $response = $this->json('GET', 'api/region/' . $region->getKey());
@@ -26,7 +27,7 @@ class ShowRegionControllerTest extends TestCase
             [
                 'data' => [
                     'name'        => $regionName,
-                    'environment' => $environment,
+                    'environment' => $environment->getKey(),
                 ],
             ]
         );
@@ -34,14 +35,7 @@ class ShowRegionControllerTest extends TestCase
 
     public function test_it_returns_a_region_with_parent_region() : void
     {
-        $regionName = 'A Region';
-        $environment = 'Desert';
-        $parentRegion = 'A Parent Region';
-        $region = Region::factory()->create([
-            'name'          => $regionName,
-            'environment'   => $environment,
-            'parent_region' => $parentRegion,
-        ]);
+        $region = Region::factory()->withParentRegion()->create();
 
         $response = $this->json('GET', 'api/region/' . $region->getKey());
 
@@ -49,9 +43,9 @@ class ShowRegionControllerTest extends TestCase
         $response->assertJson(
             [
                 'data' => [
-                    'name'          => $regionName,
-                    'environment'   => $environment,
-                    'parent_region' => $parentRegion,
+                    'name'          => $region->name,
+                    'environment'   => $region->environment,
+                    'parent_region' => $region->parent_region,
                 ],
             ]
         );

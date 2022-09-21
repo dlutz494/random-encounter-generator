@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Region extends Model
 {
@@ -20,5 +21,15 @@ class Region extends Model
         'environment',
         'parent_region',
     ];
+
+    public function environment() : HasOne
+    {
+        return $this->hasOne(Environment::class);
+    }
+
+    public function parentRegion() : HasOne
+    {
+        return $this->hasOne(Region::class);
+    }
 
 }

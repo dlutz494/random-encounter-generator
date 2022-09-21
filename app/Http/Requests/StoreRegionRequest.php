@@ -15,8 +15,8 @@ class StoreRegionRequest extends FormRequest
     {
         return [
             'name'          => 'required|unique:regions|string',
-            'environment'   => 'required|string',
-            'parent_region' => 'nullable|string',
+            'environment'   => 'required|exists:environments,id|numeric',
+            'parent_region' => 'nullable|exists:regions,id|numeric',
         ];
     }
 }

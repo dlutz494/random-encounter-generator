@@ -22,25 +22,25 @@ class StoreRegionControllerTest extends TestCase
     /**
      * @dataProvider ProvidesInvalidRegions
      */
-    public function test_it_returns_422_with_invalid_regions($region, $status, $expectedResponse) : void
+    public function test_it_returns_422_with_invalid_regions($region, $status, $errors) : void
     {
         $response = $this->json('POST', 'api/region', $region);
 
         $response->assertStatus($status);
-        $response->assertSee($expectedResponse);
+        $response->assertJsonFragment($errors);
     }
 
     public function test_it_returns_422_with_duplicate_name()
     {
-        $region = Region::factory()->create();
+        $region = Region::factory()->withUniqueName()->create();
 
         $response = $this->json('POST', 'api/region', [
-            'name' => $region->name,
+            'name'        => $region->name,
             'environment' => $region->environment,
         ]);
 
         $response->assertStatus(422);
-        $response->assertSee('The name has already been taken.');
+        $response->assertJsonFragment(['The name has already been taken.']);
     }
 
     public function ProvidesValidRegions() : array
@@ -68,46 +68,55 @@ class StoreRegionControllerTest extends TestCase
 
     public function ProvidesInvalidRegions() : array
     {
-        $name = 'A Region';
-        $environment = 'Test Environment';
-        $parentRegion = 'A Parent Region';
+        $validName = 'A Region';
+        $validEnvironment = 1;
+        $validParentRegion = 1;
 
         return [
-            'Region with no Name' => [
+            'Region with no Name'       => [
                 'region' => [
-                    'environment'   => $environment,
-                    'parent_region' => $parentRegion,
+                    'environment'   => $validEnvironment,
+                    'parent_region' => $validParentRegion,
                 ],
                 'status' => 422,
-                'expectedResponse' => 'The name field is required.'
+                'errors' => [
+                    'The name field is required.',
+                ],
             ],
-            'Name is an integer' => [
+            'Name is an integer'        => [
                 'region' => [
-                    'name' => 123,
-                    'environment'   => $environment,
-                    'parent_region' => $parentRegion,
+                    'name'          => 123,
+                    'environment'   => $validEnvironment,
+                    'parent_region' => $validParentRegion,
                 ],
                 'status' => 422,
-                'expectedResponse' => 'The name must be a string.'
+                'errors' => [
+                    'The name must be a string.',
+                ],
             ],
-            'Environment is an integer' => [
+            'Environment is a string'   => [
                 'region' => [
-                    'name' => $name,
-                    'environment'   => 123,
-                    'parent_region' => $parentRegion,
+                    'name'          => $validName,
+                    'environment'   => 'Environment',
+                    'parent_region' => $validParentRegion,
                 ],
                 'status' => 422,
-                'expectedResponse' => 'The environment must be a string.'
+                'errors' => [
+                    'The environment must be a number.',
+                ],
             ],
-            'Parent Region is an integer' => [
+            'Parent Region is a string' => [
                 'region' => [
-                    'name' => $name,
-                    'environment'   => $environment,
-                    'parent_region' => 123,
+                    'name'          => $validName,
+                    'environment'   => $validEnvironment,
+                    'parent_region' => 'Parent Region',
                 ],
                 'status' => 422,
-                'expectedResponse' => 'The parent region must be a string.'
+                'errors' => [
+                    'The parent region must be a number.',
+                ],
             ],
         ];
     }
+
 }

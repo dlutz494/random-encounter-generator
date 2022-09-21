@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\RegionController;
 
+use App\Models\Environment;
 use App\Models\Region;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -23,8 +24,8 @@ class UpdateRegionControllerTest extends TestCase
     {
         $payload = [
             'name'          => 'Update Test',
-            'environment'   => 'Urban',
-            'parent_region' => 'Parent Update Test',
+            'environment'   => Environment::factory()->create()->getKey(),
+            'parent_region' => Region::factory()->withUniqueName()->create()->getKey(),
         ];
 
         $this->json('PUT', 'api/region/' . $this->region->getKey(), $payload);
