@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreEnvironmentRequest;
 use App\Http\Requests\UpdateEnvironmentRequest;
 use App\Http\Resources\EnvironmentResource;
 use App\Models\Environment;
@@ -18,7 +19,7 @@ class EnvironmentController extends Controller
         return Environment::all();
     }
 
-    public function store(Request $request) : Response
+    public function store(StoreEnvironmentRequest $request) : Response
     {
         try {
             Environment::create($request->all());

@@ -31,7 +31,7 @@ class StoreEnvironmentControllerTest extends TestCase
             'name' => null,
         ]);
 
-        $response->assertNotFound();
+        $response->assertUnprocessable();
     }
 
 }
