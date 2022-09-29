@@ -47,7 +47,7 @@ class StoreRegionControllerTest extends TestCase
 
     public function test_it_returns_422_with_duplicate_name()
     {
-        $region = Region::factory()->withUniqueName()->create();
+        $region = Region::factory()->create();
 
         $response = $this->json('POST', 'api/region', [
             'name'        => $region->name,

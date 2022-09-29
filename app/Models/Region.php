@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Region extends Model
 {
@@ -32,4 +33,8 @@ class Region extends Model
         return $this->hasOne(Region::class);
     }
 
+    public function encounters() : morphToMany
+    {
+        return $this->morphToMany(Encounter::class, 'encounter_enemies');
+    }
 }

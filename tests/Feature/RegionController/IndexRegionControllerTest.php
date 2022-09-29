@@ -48,7 +48,7 @@ class IndexRegionControllerTest extends TestCase
 
     public function test_it_returns_multiple_regions() : void
     {
-        $regions = Region::factory(3)->withUniqueName()->create();
+        $regions = Region::factory(3)->create();
 
         $response = $this->json('GET', 'api/region');
 

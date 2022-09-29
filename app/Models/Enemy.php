@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Enemy extends Model
 {
@@ -20,4 +21,9 @@ class Enemy extends Model
         'statblock',
         'challenge_rating',
     ];
+
+    public function encounters() : morphToMany
+    {
+        return $this->morphToMany(Encounter::class, 'encounter_enemies');
+    }
 }

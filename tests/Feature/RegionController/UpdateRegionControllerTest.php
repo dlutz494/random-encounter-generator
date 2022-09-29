@@ -25,7 +25,7 @@ class UpdateRegionControllerTest extends TestCase
         $payload = [
             'name'          => 'Update Test',
             'environment'   => Environment::factory()->create()->getKey(),
-            'parent_region' => Region::factory()->withUniqueName()->create()->getKey(),
+            'parent_region' => Region::factory()->create()->getKey(),
         ];
 
         $this->json('PUT', 'api/region/' . $this->region->getKey(), $payload);

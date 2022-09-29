@@ -11,7 +11,7 @@ class RegionFactory extends Factory
     public function definition() : array
     {
         return [
-            'name'        => 'Test Region',
+            'name'        => $this->faker->unique()->city,
             'environment' => Environment::factory()->create(),
         ];
     }
@@ -20,29 +20,7 @@ class RegionFactory extends Factory
     {
         return $this->state(function () {
             return [
-                'parent_region' => Region::factory()->create([
-                    'name' => 'Test Parent Region',
-                ])->getKey(),
-            ];
-        });
-    }
-
-    public function withUniqueName() : self
-    {
-        return $this->state(function () {
-            return [
-                'name' => $this->faker->unique()->city,
-            ];
-        });
-    }
-
-    public function withUniqueParentRegion() : self
-    {
-        return $this->state(function () {
-            return [
-                'parent_region' => Region::factory()->create([
-                    'name' => $this->faker->unique()->city,
-                ])->getKey(),
+                'parent_region' => Region::factory()->create()->getKey(),
             ];
         });
     }
