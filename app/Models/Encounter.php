@@ -12,8 +12,6 @@ class Encounter extends Model
 
     protected mixed $name;
     protected mixed $description;
-    protected mixed $regions;
-    protected mixed $enemies;
     protected mixed $difficulty;
 
     protected $table = 'encounters';
@@ -21,8 +19,6 @@ class Encounter extends Model
     protected $fillable = [
         'name',
         'description',
-        'regions',
-        'enemies',
         'difficulty',
     ];
 
