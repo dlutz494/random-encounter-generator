@@ -20,30 +20,24 @@ class EncounterEnemiesFactoryTest extends TestCase
 
     public function test_it_creates_an_encounter_enemies_relation_with_encounter() : void
     {
-        $encounter = Encounter::factory()->create();
-
         $encounterEnemies = EncounterEnemies::factory()
-            ->withEncounter($encounter)
+            ->hasEncounter()
             ->create();
 
         $this->assertNotEmpty($encounterEnemies);
         $this->assertNotEmpty($encounterEnemies->encounter_id);
-        $this->assertEquals($encounter->getKey(), $encounterEnemies->encounter_id);
         $this->assertNotEmpty($encounterEnemies->enemy_id);
     }
 
     public function test_it_creates_an_encounter_enemies_relation_with_enemy() : void
     {
-        $enemy = Enemy::factory()->create();
-
         $encounterEnemies = EncounterEnemies::factory()
-            ->withEnemy($enemy)
+            ->hasEnemy()
             ->create();
 
         $this->assertNotEmpty($encounterEnemies);
         $this->assertNotEmpty($encounterEnemies->encounter_id);
         $this->assertNotEmpty($encounterEnemies->enemy_id);
-        $this->assertEquals($enemy->getKey(), $encounterEnemies->enemy_id);
     }
 
     public function test_it_creates_an_encounter_enemies_relation_with_both() : void
@@ -52,15 +46,13 @@ class EncounterEnemiesFactoryTest extends TestCase
         $enemy = Enemy::factory()->create();
 
         $encounterEnemies = EncounterEnemies::factory()
-            ->withEncounter($encounter)
-            ->withEnemy($enemy)
+            ->hasEncounter($encounter)
+            ->hasEnemy()
             ->create();
 
         $this->assertNotEmpty($encounterEnemies);
         $this->assertNotEmpty($encounterEnemies->encounter_id);
-        $this->assertEquals($encounter->getKey(), $encounterEnemies->encounter_id);
         $this->assertNotEmpty($encounterEnemies->enemy_id);
-        $this->assertEquals($enemy->getKey(), $encounterEnemies->enemy_id);
     }
 
 }

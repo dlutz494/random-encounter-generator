@@ -13,24 +13,8 @@ class EncounterEnemiesFactory extends Factory
         return [
             'encounter_id' => Encounter::factory()->create(),
             'enemy_id'     => Enemy::factory()->create(),
+            'quantity'     => $this->faker->numberBetween(1, 10),
         ];
     }
 
-    public function withEncounter(Encounter $encounter) : EncounterEnemiesFactory
-    {
-        return $this->state(function () use ($encounter) {
-            return [
-                'encounter_id' => $encounter->getKey(),
-            ];
-        });
-    }
-
-    public function withEnemy(Enemy $enemy) : EncounterEnemiesFactory
-    {
-        return $this->state(function () use ($enemy) {
-            return [
-                'enemy_id' => $enemy->getKey(),
-            ];
-        });
-    }
 }

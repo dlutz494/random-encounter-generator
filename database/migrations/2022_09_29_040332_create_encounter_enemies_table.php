@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->id('encounter_enemy_id');
             $table->foreignIdFor(Encounter::class, 'encounter_id');
             $table->foreignIdFor(Enemy::class, 'enemy_id');
+            $table->integer('quantity', unsigned: true)->default(1);
             $table->timestamps();
         });
     }
