@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\EncounterEnemies;
+namespace Tests\Unit\EncounterEnemiesFactory;
 
 use App\Models\Encounter;
 use App\Models\EncounterEnemies;

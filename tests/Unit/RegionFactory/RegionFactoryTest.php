@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Region;
+namespace Tests\Unit\RegionFactory;
 
 use App\Models\Environment;
 use App\Models\Region;

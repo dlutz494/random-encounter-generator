@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Encounter;
+namespace Tests\Unit\EncounterFactory;
 
 use App\Models\Encounter;
 use Tests\TestCase;
