@@ -22,6 +22,10 @@ class Enemy extends Model
         'challenge_rating',
     ];
 
+    protected $hidden = [
+        'pivot',
+    ];
+
     public function encounters() : BelongsToMany
     {
         return $this->belongsToMany(Encounter::class, 'encounter_enemies');

@@ -24,6 +24,10 @@ class Region extends Model
         'parent_region',
     ];
 
+    protected $hidden = [
+        'pivot',
+    ];
+
     public function environment() : HasOne
     {
         return $this->hasOne(Environment::class);
