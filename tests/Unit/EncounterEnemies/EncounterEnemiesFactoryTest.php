@@ -31,13 +31,16 @@ class EncounterEnemiesFactoryTest extends TestCase
 
     public function test_it_creates_an_encounter_enemies_relation_with_enemy() : void
     {
+        $enemy = Enemy::factory()->create();
+
         $encounterEnemies = EncounterEnemies::factory()
-            ->hasEnemy()
+            ->for($enemy)
             ->create();
 
         $this->assertNotEmpty($encounterEnemies);
         $this->assertNotEmpty($encounterEnemies->encounter_id);
         $this->assertNotEmpty($encounterEnemies->enemy_id);
+        $this->assertEquals($enemy->getKey(), $encounterEnemies->enemy_id);
     }
 
     public function test_it_creates_an_encounter_enemies_relation_with_both() : void
@@ -46,13 +49,15 @@ class EncounterEnemiesFactoryTest extends TestCase
         $enemy = Enemy::factory()->create();
 
         $encounterEnemies = EncounterEnemies::factory()
-            ->hasEncounter($encounter)
-            ->hasEnemy()
+            ->for($encounter)
+            ->for($enemy)
             ->create();
 
         $this->assertNotEmpty($encounterEnemies);
         $this->assertNotEmpty($encounterEnemies->encounter_id);
         $this->assertNotEmpty($encounterEnemies->enemy_id);
+        $this->assertEquals($encounter->getKey(), $encounterEnemies->encounter_id);
+        $this->assertEquals($enemy->getKey(), $encounterEnemies->enemy_id);
     }
 
 }
