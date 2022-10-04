@@ -36,7 +36,7 @@ class Region extends Model
 
     public function childRegion() : BelongsTo
     {
-        return $this->belongsTo(Region::class);
+        return $this->belongsTo(Region::class, 'parent_region');
     }
 
     public function encounters() : BelongsToMany
