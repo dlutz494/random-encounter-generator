@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Encounter extends Model
 {
@@ -26,13 +26,13 @@ class Encounter extends Model
         'difficulty',
     ];
 
-    public function regions() : morphToMany
+    public function regions() : BelongsToMany
     {
-        return $this->morphedByMany(Region::class, 'encounter_regions');
+        return $this->belongsToMany(Region::class, 'encounter_regions');
     }
 
-    public function enemies() : morphToMany
+    public function enemies() : BelongsToMany
     {
-        return $this->morphedByMany(Enemy::class, 'encounter_enemies');
+        return $this->belongsToMany(Enemy::class, 'encounter_enemies');
     }
 }

@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Region extends Model
 {
@@ -33,8 +34,13 @@ class Region extends Model
         return $this->hasOne(Region::class);
     }
 
-    public function encounters() : morphToMany
+    public function childRegion() : BelongsTo
     {
-        return $this->morphToMany(Encounter::class, 'encounter_enemies');
+        return $this->belongsTo(Region::class);
+    }
+
+    public function encounters() : BelongsToMany
+    {
+        return $this->belongsToMany(Encounter::class, 'encounter_enemies');
     }
 }
