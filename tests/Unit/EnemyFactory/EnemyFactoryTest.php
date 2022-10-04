@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Enemy;
+namespace Tests\Unit\EnemyFactory;
 
 use App\Models\Enemy;
 use Tests\TestCase;

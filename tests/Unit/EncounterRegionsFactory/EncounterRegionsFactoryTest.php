@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\EncounterRegions;
+namespace Tests\Unit\EncounterRegionsFactory;
 
 use App\Models\Encounter;
 use App\Models\EncounterRegions;

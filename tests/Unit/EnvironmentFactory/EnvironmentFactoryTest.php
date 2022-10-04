@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Environment;
+namespace Tests\Unit\EnvironmentFactory;
 
 use App\Models\Environment;
 use Tests\TestCase;
