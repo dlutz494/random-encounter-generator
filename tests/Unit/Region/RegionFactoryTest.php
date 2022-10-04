@@ -10,7 +10,7 @@ class RegionFactoryTest extends TestCase
 {
     public function test_the_factory_creates_a_region() : void
     {
-        $region = Region::factory()->make();
+        $region = Region::factory()->create();
 
         $this->assertNotEmpty($region);
         $this->assertNotEmpty($region->name);
@@ -18,9 +18,9 @@ class RegionFactoryTest extends TestCase
         $this->assertEmpty($region->parent_region);
     }
 
-    public function test_the_factory_creates_a_region_with_parent() : void
+    public function test_the_factory_creates_a_region_with_parent_region() : void
     {
-        $region = Region::factory()->withParentRegion()->make();
+        $region = Region::factory()->withParentRegion()->create();
 
         $this->assertNotEmpty($region);
         $this->assertNotEmpty($region->name);
@@ -30,20 +30,20 @@ class RegionFactoryTest extends TestCase
 
     public function test_the_factory_creates_a_region_with_values() : void
     {
-        $regionName = 'Halcyon Forests';
+        $regionName = 'Region-' . uniqid();
         $environment = Environment::factory()->create();
         $parentRegion = Region::factory()->create();
 
-        $region = Region::factory()->make([
+        $region = Region::factory()->create([
             'name'          => $regionName,
-            'environment_id'   => $environment->getKey(),
+            'environment'   => $environment->getKey(),
             'parent_region' => $parentRegion->getKey(),
         ]);
 
         $this->assertEquals(
             [
                 $region->name,
-                $region->environment_id,
+                $region->environment,
                 $region->parent_region,
             ],
             [
@@ -56,7 +56,7 @@ class RegionFactoryTest extends TestCase
 
     public function test_the_factory_creates_a_region_without_parent_region() : void
     {
-        $regionName = 'Halcyon Forests';
+        $regionName = 'Region-' . uniqid();
         $environment = Environment::factory()->create();
 
         $region = Region::factory()->create([
@@ -65,7 +65,16 @@ class RegionFactoryTest extends TestCase
         ]);
 
         $this->assertNotEmpty($region);
-        $this->assertEquals([$region->name, $region->environment], [$regionName, $environment->getKey()]);
+        $this->assertEquals(
+            [
+                $region->name,
+                $region->environment,
+            ],
+            [
+                $regionName,
+                $environment->getKey(),
+            ]
+        );
         $this->assertEmpty($region->parent_region);
     }
 }
