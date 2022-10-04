@@ -11,8 +11,9 @@ class RegionFactory extends Factory
     public function definition() : array
     {
         return [
-            'name'        => 'Region-' . uniqid(),
-            'environment' => Environment::factory()->create(),
+            'name'          => 'Region-' . uniqid(),
+            'environment'   => Environment::factory()->create(),
+            'parent_region' => null,
         ];
     }
 
