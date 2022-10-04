@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEncounterRequest;
 use App\Http\Requests\UpdateEncounterRequest;
+use App\Http\Resources\EncounterResource;
 use App\Models\Encounter;
 
 class EncounterController extends Controller
@@ -31,7 +32,7 @@ class EncounterController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreEncounterRequest  $request
+     * @param \App\Http\Requests\StoreEncounterRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreEncounterRequest $request)
@@ -39,21 +40,15 @@ class EncounterController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Encounter  $encounter
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Encounter $encounter)
+    public function show(Encounter $encounter) : EncounterResource
     {
-        //
+        return EncounterResource::make($encounter);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Encounter  $encounter
+     * @param \App\Models\Encounter $encounter
      * @return \Illuminate\Http\Response
      */
     public function edit(Encounter $encounter)
@@ -64,8 +59,8 @@ class EncounterController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateEncounterRequest  $request
-     * @param  \App\Models\Encounter  $encounter
+     * @param \App\Http\Requests\UpdateEncounterRequest $request
+     * @param \App\Models\Encounter $encounter
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateEncounterRequest $request, Encounter $encounter)
@@ -76,7 +71,7 @@ class EncounterController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Encounter  $encounter
+     * @param \App\Models\Encounter $encounter
      * @return \Illuminate\Http\Response
      */
     public function destroy(Encounter $encounter)
