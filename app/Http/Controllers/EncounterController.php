@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateEncounterRequest;
 use App\Http\Resources\EncounterResource;
 use App\Models\Encounter;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\Response;
 
 class EncounterController extends Controller
 {
@@ -15,25 +16,14 @@ class EncounterController extends Controller
         return EncounterResource::collection(Encounter::all());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create() : Response
     {
-        //
+        return new Response('Empty route');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \App\Http\Requests\StoreEncounterRequest $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreEncounterRequest $request)
+    public function store(StoreEncounterRequest $request) : Response
     {
-        //
+        return new Response('Empty route');
     }
 
     public function show(Encounter $encounter) : EncounterResource
@@ -41,37 +31,18 @@ class EncounterController extends Controller
         return EncounterResource::make($encounter);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param \App\Models\Encounter $encounter
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Encounter $encounter)
+    public function edit(Encounter $encounter) : Response
     {
-        //
+        return new Response('Empty route');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \App\Http\Requests\UpdateEncounterRequest $request
-     * @param \App\Models\Encounter $encounter
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateEncounterRequest $request, Encounter $encounter)
+    public function update(UpdateEncounterRequest $request, Encounter $encounter) : Response
     {
-        //
+        return new Response('Empty route');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param \App\Models\Encounter $encounter
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Encounter $encounter)
+    public function destroy(Encounter $encounter) : Response
     {
-        //
+        return new Response('Empty route');
     }
 }
