@@ -31,12 +31,14 @@ class ShowEncounterControllerTest extends TestCase
 
         $response = $this->get('api/encounter/' . $encounter->getKey());
 
-        $response->assertJsonFragment([
-            'name'        => $name,
-            'description' => $description,
-            'regions'     => $regions->toArray(),
-            'enemies'     => $enemies->toArray(),
-            'difficulty'  => $difficulty,
+        $response->assertJson([
+            'data' => [
+                'name'        => $name,
+                'description' => $description,
+                'regions'     => $regions->toArray(),
+                'enemies'     => $enemies->toArray(),
+                'difficulty'  => $difficulty,
+            ],
         ]);
     }
 
@@ -59,17 +61,15 @@ class ShowEncounterControllerTest extends TestCase
 
         $response = $this->get('api/encounter/' . $encounter->getKey());
 
-        $response->assertJsonFragment([
-            'name' => $enemy->name,
-        ]);
-
-        $response->assertJsonFragment([
-            'id'          => $encounter->getKey(),
-            'name'        => $name,
-            'description' => $description,
-            'difficulty'  => $difficulty,
-            'regions'     => [$region],
-            'enemies'     => [$enemy],
+        $response->assertJson([
+            'data' => [
+                'id'          => $encounter->getKey(),
+                'name'        => $name,
+                'description' => $description,
+                'difficulty'  => $difficulty,
+                'regions'     => [$region->toArray()],
+                'enemies'     => [$enemy->toArray()],
+            ],
         ]);
     }
 
