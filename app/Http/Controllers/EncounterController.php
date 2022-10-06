@@ -6,17 +6,13 @@ use App\Http\Requests\StoreEncounterRequest;
 use App\Http\Requests\UpdateEncounterRequest;
 use App\Http\Resources\EncounterResource;
 use App\Models\Encounter;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class EncounterController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index() : AnonymousResourceCollection
     {
-        //
+        return EncounterResource::collection(Encounter::all());
     }
 
     /**
