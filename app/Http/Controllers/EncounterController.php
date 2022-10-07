@@ -6,8 +6,12 @@ use App\Http\Requests\StoreEncounterRequest;
 use App\Http\Requests\UpdateEncounterRequest;
 use App\Http\Resources\EncounterResource;
 use App\Models\Encounter;
+use App\Models\EncounterEnemies;
+use App\Models\EncounterRegions;
+use Exception;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
 
 class EncounterController extends Controller
 {
@@ -16,12 +20,38 @@ class EncounterController extends Controller
         return EncounterResource::collection(Encounter::all());
     }
 
-    public function create() : Response
+    public function store(StoreEncounterRequest $request) : Response|string
     {
-        return new Response('Empty route');
+        try {
+            $encounter = $request->all(['name', 'description', 'difficulty']);
+
+            $createdEncounter = Encounter::create($encounter);
+            $regions = $request->get('regions');
+            foreach ($regions as $region) {
+                EncounterRegions::create([
+                    'encounter_id' => $createdEncounter->getKey(),
+                    'region_id'    => $region['id'],
+                ]);
+            }
+
+            $enemies = $request->get('enemies');
+            foreach ($enemies as $enemy) {
+                EncounterEnemies::create([
+                    'encounter_id' => $createdEncounter->getKey(),
+                    'enemy_id'     => $enemy['id'],
+                    'quantity'     => 1,
+                ]);
+            }
+
+            return Response('Enemy stored successfully', 200);
+        } catch (ValidationException $e) {
+            return Response($e->getMessage());
+        } catch (Exception $e) {
+            return Response('An error occurred', 404);
+        }
     }
 
-    public function store(StoreEncounterRequest $request) : Response
+    public function create() : Response
     {
         return new Response('Empty route');
     }
