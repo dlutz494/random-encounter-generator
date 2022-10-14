@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -25,6 +24,12 @@ class Encounter extends Model
         'difficulty',
         'regions',
         'enemies',
+    ];
+
+    protected $casts = [
+        'name'        => 'string',
+        'description' => 'string',
+        'difficulty'  => 'string',
     ];
 
     public function regions() : BelongsToMany
