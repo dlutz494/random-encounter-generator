@@ -44,9 +44,9 @@ class StoreEncounterControllerTest extends TestCase
         }
         foreach ($this->enemies as $enemy) {
             $this->assertDatabaseHas('encounter_enemies', [
-                'encounter_id'  => $encounter->getKey(),
-                'enemy_id'  => $enemy->getKey(),
-                'quantity'  => 1,
+                'encounter_id' => $encounter->getKey(),
+                'enemy_id'     => $enemy->getKey(),
+                'quantity'     => 1,
             ]);
         }
     }
@@ -54,10 +54,10 @@ class StoreEncounterControllerTest extends TestCase
     public function test_it_stores_an_encounter_without_a_description() : void
     {
         $response = $this->json('POST', 'api/encounter', [
-            'name'       => $this->name,
-            'difficulty' => $this->difficulty,
-            'regions'    => $this->regions,
-            'enemies'    => $this->enemies,
+            'name'        => $this->name,
+            'difficulty'  => $this->difficulty,
+            'regions'     => $this->regions,
+            'enemies'     => $this->enemies,
         ]);
 
         $encounter = Encounter::first();
@@ -75,9 +75,9 @@ class StoreEncounterControllerTest extends TestCase
         }
         foreach ($this->enemies as $enemy) {
             $this->assertDatabaseHas('encounter_enemies', [
-                'encounter_id'  => $encounter->getKey(),
-                'enemy_id'  => $enemy->getKey(),
-                'quantity'  => 1,
+                'encounter_id' => $encounter->getKey(),
+                'enemy_id'     => $enemy->getKey(),
+                'quantity'     => 1,
             ]);
         }
     }
@@ -106,9 +106,9 @@ class StoreEncounterControllerTest extends TestCase
         }
         foreach ($this->enemies as $enemy) {
             $this->assertDatabaseHas('encounter_enemies', [
-                'encounter_id'  => $encounter->getKey(),
-                'enemy_id'  => $enemy->getKey(),
-                'quantity'  => 1,
+                'encounter_id' => $encounter->getKey(),
+                'enemy_id'     => $enemy->getKey(),
+                'quantity'     => 1,
             ]);
         }
     }

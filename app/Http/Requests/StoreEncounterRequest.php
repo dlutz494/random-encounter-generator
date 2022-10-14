@@ -14,11 +14,11 @@ class StoreEncounterRequest extends FormRequest
     public function rules() : array
     {
         return [
-            'name'        => 'string|required|unique:encounters',
-            'description' => 'string|nullable',
-            'difficulty'  => 'string|nullable',
-            'regions'     => 'array|required',
-            'enemies'     => 'array|required',
+            'name'        => 'required|string|unique:encounters',
+            'description' => 'nullable|string',
+            'difficulty'  => 'nullable|string',
+            'regions'     => 'required|array',
+            'enemies'     => 'required|array',
         ];
     }
 }
