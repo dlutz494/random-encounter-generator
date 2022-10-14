@@ -17,4 +17,13 @@ class EncounterEnemiesFactory extends Factory
         ];
     }
 
+    public function withEncounter(Encounter $encounter) : EncounterEnemiesFactory
+    {
+        return $this->state(function () use ($encounter) {
+            return [
+                'encounter_id' => $encounter->getKey(),
+            ];
+        });
+    }
+
 }
