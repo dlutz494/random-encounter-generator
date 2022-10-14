@@ -7,6 +7,7 @@ use App\Models\Enemy;
 use App\Models\Region;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
 class StoreEncounterControllerTest extends TestCase
@@ -54,10 +55,10 @@ class StoreEncounterControllerTest extends TestCase
     public function test_it_stores_an_encounter_without_a_description() : void
     {
         $response = $this->json('POST', 'api/encounter', [
-            'name'        => $this->name,
-            'difficulty'  => $this->difficulty,
-            'regions'     => $this->regions,
-            'enemies'     => $this->enemies,
+            'name'       => $this->name,
+            'difficulty' => $this->difficulty,
+            'regions'    => $this->regions,
+            'enemies'    => $this->enemies,
         ]);
 
         $encounter = Encounter::first();
@@ -84,12 +85,13 @@ class StoreEncounterControllerTest extends TestCase
 
     public function test_it_stores_an_encounter_without_a_difficulty() : void
     {
-        $response = $this->json('POST', 'api/encounter', [
+        $payload = [
             'name'        => $this->name,
             'description' => $this->description,
             'regions'     => $this->regions,
             'enemies'     => $this->enemies,
-        ]);
+        ];
+        $response = $this->getResponse($payload);
 
         $encounter = Encounter::first();
         $response->assertSuccessful();
@@ -113,6 +115,11 @@ class StoreEncounterControllerTest extends TestCase
         }
     }
 
+    public function getResponse(array $payload) : TestResponse
+    {
+        return $this->json('POST', 'api/encounter', $payload);
+    }
+
     public function test_it_does_not_store_an_encounter_with_no_name() : void
     {
         $payload = [
@@ -122,7 +129,7 @@ class StoreEncounterControllerTest extends TestCase
             'enemies'     => $this->enemies,
         ];
 
-        $response = $this->json('POST', 'api/encounter', $payload);
+        $response = $this->getResponse($payload);
 
         $response->assertUnprocessable()->assertSee('The name field is required');
     }
@@ -149,7 +156,7 @@ class StoreEncounterControllerTest extends TestCase
             'difficulty'  => $this->difficulty,
             'regions'     => $this->regions,
         ];
-        $response = $this->json('POST', 'api/encounter', $payload);
+        $response = $this->getResponse($payload);
 
         $response->assertUnprocessable()->assertSee('The enemies field is required.');
     }

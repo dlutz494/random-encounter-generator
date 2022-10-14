@@ -6,6 +6,7 @@ use App\Models\Encounter;
 use App\Models\Enemy;
 use App\Models\Region;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
 class ShowEncounterControllerTest extends TestCase
@@ -29,7 +30,7 @@ class ShowEncounterControllerTest extends TestCase
                 'difficulty'  => $difficulty,
             ]);
 
-        $response = $this->get('api/encounter/' . $encounter->getKey());
+        $response = $this->getResponse($encounter);
 
         $response->assertJson([
             'data' => [
@@ -40,6 +41,11 @@ class ShowEncounterControllerTest extends TestCase
                 'difficulty'  => $difficulty,
             ],
         ]);
+    }
+
+    public function getResponse(mixed $encounter) : TestResponse
+    {
+        return $this->get('api/encounter/' . $encounter->getKey());
     }
 
     public function test_it_returns_an_encounter_with_one_region_and_one_enemy() : void
@@ -59,7 +65,7 @@ class ShowEncounterControllerTest extends TestCase
                 'difficulty'  => $difficulty,
             ]);
 
-        $response = $this->get('api/encounter/' . $encounter->getKey());
+        $response = $this->getResponse($encounter);
 
         $response->assertJson([
             'data' => [
