@@ -13,8 +13,8 @@ return new class extends Migration
         Schema::create('encounters', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->longText('description');
-            $table->string('difficulty');
+            $table->longText('description')->nullable();
+            $table->string('difficulty')->nullable();
             $table->timestamps();
         });
     }
