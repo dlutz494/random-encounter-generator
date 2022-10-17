@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class EncounterEnemies extends Model
+class EncounterEnemy extends Model
 {
     use HasFactory;
 
-    protected $table = 'encounter_enemies';
+    protected $table = 'encounter_enemy';
 
     protected $fillable = [
         'encounter_id',

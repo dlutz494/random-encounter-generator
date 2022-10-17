@@ -34,11 +34,11 @@ class Encounter extends Model
 
     public function regions() : BelongsToMany
     {
-        return $this->belongsToMany(Region::class, 'encounter_regions');
+        return $this->belongsToMany(Region::class, 'encounter_region')->withTimestamps();
     }
 
     public function enemies() : BelongsToMany
     {
-        return $this->belongsToMany(Enemy::class, 'encounter_enemies');
+        return $this->belongsToMany(Enemy::class, 'encounter_enemy')->withTimestamps();
     }
 }

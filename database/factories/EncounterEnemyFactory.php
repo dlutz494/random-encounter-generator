@@ -6,7 +6,7 @@ use App\Models\Encounter;
 use App\Models\Enemy;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class EncounterEnemiesFactory extends Factory
+class EncounterEnemyFactory extends Factory
 {
     public function definition() : array
     {
@@ -17,7 +17,7 @@ class EncounterEnemiesFactory extends Factory
         ];
     }
 
-    public function withEncounter(Encounter $encounter) : EncounterEnemiesFactory
+    public function withEncounter(Encounter $encounter) : EncounterEnemyFactory
     {
         return $this->state(function () use ($encounter) {
             return [

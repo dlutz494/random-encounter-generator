@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class EncounterRegions extends Model
+class EncounterRegion extends Model
 {
     use HasFactory;
 
-    protected $table = 'encounter_regions';
+    protected $table = 'encounter_region';
 
     protected $fillable = [
         'encounter_id',
@@ -19,11 +19,11 @@ class EncounterRegions extends Model
 
     public function encounter() : BelongsTo
     {
-        return $this->belongsTo(Encounter::class);
+        return $this->belongsTo(Encounter::class, ownerKey: 'encounter_id');
     }
 
     public function region() : BelongsTo
     {
-        return $this->belongsTo(Region::class);
+        return $this->belongsTo(Region::class, ownerKey: 'region_id');
     }
 }

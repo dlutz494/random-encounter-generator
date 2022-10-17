@@ -6,7 +6,7 @@ use App\Models\Encounter;
 use App\Models\Region;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class EncounterRegionsFactory extends Factory
+class EncounterRegionFactory extends Factory
 {
     public function definition() : array
     {
@@ -16,7 +16,7 @@ class EncounterRegionsFactory extends Factory
         ];
     }
 
-    public function withEncounter(Encounter $encounter) : EncounterRegionsFactory
+    public function withEncounter(Encounter $encounter) : EncounterRegionFactory
     {
         return $this->state(function () use ($encounter) {
             return [
@@ -25,7 +25,7 @@ class EncounterRegionsFactory extends Factory
         });
     }
 
-    public function withRegion(Region $region) : EncounterRegionsFactory
+    public function withRegion(Region $region) : EncounterRegionFactory
     {
         return $this->state(function () use ($region) {
             return [
