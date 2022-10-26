@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('environments', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->default('Environment');
             $table->timestamps();
         });
     }
