@@ -18,4 +18,13 @@ class EncounterEnemy extends Model
         'quantity',
     ];
 
+    public function encounter() : BelongsTo
+    {
+        return $this->belongsTo(Encounter::class);
+    }
+
+    public function enemy() : BelongsTo
+    {
+        return $this->belongsTo(Enemy::class);
+    }
 }
