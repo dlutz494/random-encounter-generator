@@ -38,13 +38,13 @@ class StoreEncounterControllerTest extends TestCase
             'difficulty'  => $this->difficulty,
         ]);
         foreach ($this->regions as $region) {
-            $this->assertDatabaseHas('encounter_regions', [
+            $this->assertDatabaseHas('encounter_region', [
                 'encounter_id' => $encounter->getKey(),
                 'region_id'    => $region->getKey(),
             ]);
         }
         foreach ($this->enemies as $enemy) {
-            $this->assertDatabaseHas('encounter_enemies', [
+            $this->assertDatabaseHas('encounter_enemy', [
                 'encounter_id' => $encounter->getKey(),
                 'enemy_id'     => $enemy->getKey(),
                 'quantity'     => 1,
@@ -69,13 +69,13 @@ class StoreEncounterControllerTest extends TestCase
             'difficulty'  => $this->difficulty,
         ]);
         foreach ($this->regions as $region) {
-            $this->assertDatabaseHas('encounter_regions', [
+            $this->assertDatabaseHas('encounter_region', [
                 'encounter_id' => $encounter->getKey(),
                 'region_id'    => $region->getKey(),
             ]);
         }
         foreach ($this->enemies as $enemy) {
-            $this->assertDatabaseHas('encounter_enemies', [
+            $this->assertDatabaseHas('encounter_enemy', [
                 'encounter_id' => $encounter->getKey(),
                 'enemy_id'     => $enemy->getKey(),
                 'quantity'     => 1,
@@ -101,13 +101,13 @@ class StoreEncounterControllerTest extends TestCase
             'difficulty'  => null,
         ]);
         foreach ($this->regions as $region) {
-            $this->assertDatabaseHas('encounter_regions', [
+            $this->assertDatabaseHas('encounter_region', [
                 'encounter_id' => $encounter->getKey(),
                 'region_id'    => $region->getKey(),
             ]);
         }
         foreach ($this->enemies as $enemy) {
-            $this->assertDatabaseHas('encounter_enemies', [
+            $this->assertDatabaseHas('encounter_enemy', [
                 'encounter_id' => $encounter->getKey(),
                 'enemy_id'     => $enemy->getKey(),
                 'quantity'     => 1,
