@@ -12,8 +12,18 @@ return new class extends Migration {
     {
         Schema::create('encounter_region', function (Blueprint $table) {
             $table->id('encounter_region_id');
-            $table->foreignIdFor(Region::class, 'region_id');
-            $table->foreignIdFor(Encounter::class, 'encounter_id');
+            $table->foreignIdFor(Encounter::class);
+            $table->foreign('encounter_id')
+                ->references('id')
+                ->on('encounters')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+            $table->foreignIdFor(Region::class);
+            $table->foreign('region_id')
+                ->references('id')
+                ->on('regions')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
             $table->timestamps();
         });
     }
