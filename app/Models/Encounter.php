@@ -22,8 +22,6 @@ class Encounter extends Model
         'name',
         'description',
         'difficulty',
-        'regions',
-        'enemies',
     ];
 
     protected $casts = [
