@@ -7,7 +7,7 @@ use App\Models\EncounterEnemy;
 use App\Models\Enemy;
 use Tests\TestCase;
 
-class EncounterEnemiesFactoryTest extends TestCase
+class EncounterEnemyFactoryTest extends TestCase
 {
     public function test_it_creates_an_encounter_enemies_relation() : void
     {

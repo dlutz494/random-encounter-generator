@@ -7,7 +7,7 @@ use App\Models\EncounterRegion;
 use App\Models\Region;
 use Tests\TestCase;
 
-class EncounterRegionsFactoryTest extends TestCase
+class EncounterRegionFactoryTest extends TestCase
 {
     public function test_it_creates_an_encounter_enemies_relation() : void
     {
