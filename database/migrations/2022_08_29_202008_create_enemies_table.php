@@ -11,8 +11,8 @@ return new class extends Migration
         Schema::create('enemies', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->string('statblock');
-            $table->string('challenge_rating');
+            $table->string('statblock')->default('www.dndbeyond.com');
+            $table->string('challenge_rating')->default('1/4');
             $table->timestamps();
         });
     }
