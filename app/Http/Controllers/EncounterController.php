@@ -6,8 +6,8 @@ use App\Http\Requests\StoreEncounterRequest;
 use App\Http\Requests\UpdateEncounterRequest;
 use App\Http\Resources\EncounterResource;
 use App\Models\Encounter;
-use App\Models\EncounterEnemies;
-use App\Models\EncounterRegions;
+use App\Models\EncounterEnemy;
+use App\Models\EncounterRegion;
 use Exception;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
@@ -28,7 +28,7 @@ class EncounterController extends Controller
             $createdEncounter = Encounter::create($encounter);
             $regions = $request->get('regions');
             foreach ($regions as $region) {
-                EncounterRegions::create([
+                EncounterRegion::create([
                     'encounter_id' => $createdEncounter->getKey(),
                     'region_id'    => $region['id'],
                 ]);
@@ -36,7 +36,7 @@ class EncounterController extends Controller
 
             $enemies = $request->get('enemies');
             foreach ($enemies as $enemy) {
-                EncounterEnemies::create([
+                EncounterEnemy::create([
                     'encounter_id' => $createdEncounter->getKey(),
                     'enemy_id'     => $enemy['id'],
                     'quantity'     => 1,
@@ -68,7 +68,24 @@ class EncounterController extends Controller
 
     public function update(UpdateEncounterRequest $request, Encounter $encounter) : Response
     {
-        return new Response('Empty route');
+        try {
+            // Update the encounter values
+            $encounter->update($request->all(['name', 'description', 'difficulty']));
+
+            // Update region relations
+            $regions = $request->get('regions');
+            $encounter->regions()->sync($regions);
+
+            // Update enemy relations
+            $enemies = $request->get('enemies');
+            $encounter->enemies()->sync($enemies);
+
+            return Response($encounter, 200);
+        } catch (ValidationException $e) {
+            return Response($e->getMessage());
+        } catch (Exception $e) {
+            return Response('An error occurred', 404);
+        }
     }
 
     public function destroy(Encounter $encounter) : Response
