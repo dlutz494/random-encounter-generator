@@ -45,6 +45,6 @@ class Region extends Model
 
     public function encounters() : BelongsToMany
     {
-        return $this->belongsToMany(Encounter::class, 'encounter_enemies');
+        return $this->belongsToMany(Encounter::class, 'encounter_region');
     }
 }
