@@ -17,13 +17,4 @@ class EncounterRegion extends Model
         'region_id',
     ];
 
-    public function encounter() : BelongsTo
-    {
-        return $this->belongsTo(Encounter::class, ownerKey: 'encounter_id');
-    }
-
-    public function region() : BelongsTo
-    {
-        return $this->belongsTo(Region::class, ownerKey: 'region_id');
-    }
 }
