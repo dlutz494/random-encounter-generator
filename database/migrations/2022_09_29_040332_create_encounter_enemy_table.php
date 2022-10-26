@@ -12,8 +12,18 @@ return new class extends Migration {
     {
         Schema::create('encounter_enemy', function (Blueprint $table) {
             $table->id('encounter_enemy_id');
-            $table->foreignIdFor(Encounter::class, 'encounter_id');
-            $table->foreignIdFor(Enemy::class, 'enemy_id');
+            $table->foreignIdFor(Encounter::class);
+            $table->foreign('encounter_id')
+                ->references('id')
+                ->on('encounters')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+            $table->foreignIdFor(Enemy::class);
+            $table->foreign('enemy_id')
+                ->references('id')
+                ->on('enemies')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
             $table->integer('quantity', unsigned: true)->default(1);
             $table->timestamps();
         });
