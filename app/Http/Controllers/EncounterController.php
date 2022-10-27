@@ -86,6 +86,12 @@ class EncounterController extends Controller
 
     public function destroy(Encounter $encounter) : Response
     {
-        return new Response('Empty route');
+        try {
+            $encounter->delete();
+
+            return Response('Encounter successfully deleted', 200);
+        } catch (Exception $e) {
+            return Response('An error occurred', 404);
+        }
     }
 }
