@@ -14,13 +14,11 @@ class UpdateEncounterRequest extends FormRequest
     public function rules() : array
     {
         return [
-            [
-                'name'        => 'string|unique:encounters',
-                'description' => 'string',
-                'difficulty'  => 'string',
-                'regions'     => 'array',
-                'enemies'     => 'array',
-            ]
+            'name'        => 'string|unique:encounters',
+            'description' => 'string',
+            'difficulty'  => 'string',
+            'regions'     => 'array',
+            'enemies'     => 'array',
         ];
     }
 }
