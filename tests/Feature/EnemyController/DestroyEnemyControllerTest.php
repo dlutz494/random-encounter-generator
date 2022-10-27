@@ -14,6 +14,8 @@ class DestroyEnemyControllerTest extends TestCase
     {
         $enemy = Enemy::factory()->create();
 
+        $this->assertDatabaseHas('enemies', $enemy->toArray());
+
         $this->json('DELETE', 'api/enemy/' . $enemy->getKey());
 
         $this->assertDatabaseMissing('enemies', $enemy->toArray());

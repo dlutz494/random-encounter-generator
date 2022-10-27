@@ -14,6 +14,8 @@ class DestroyEnvironmentControllerTest extends TestCase
     {
         $environment = Environment::factory()->create();
 
+        $this->assertDatabaseHas('environments', $environment->toArray());
+
         $this->json('DELETE', 'api/environment/' . $environment->getKey());
 
         $this->assertDatabaseMissing('environments', $environment->toArray());
