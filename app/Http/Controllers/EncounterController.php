@@ -22,6 +22,7 @@ class EncounterController extends Controller
 
     public function store(StoreEncounterRequest $request) : Response|string
     {
+        // Refactor this to use 'attach' instead of creating pivot records directly
         try {
             $encounter = $request->all(['name', 'description', 'difficulty']);
 
@@ -63,22 +64,17 @@ class EncounterController extends Controller
 
     public function edit(Encounter $encounter) : Response
     {
-        return new Response('Empty route');
+        return new Response($encounter, 200);
     }
 
     public function update(UpdateEncounterRequest $request, Encounter $encounter) : Response
     {
         try {
-            // Update the encounter values
-            $encounter->update($request->all(['name', 'description', 'difficulty']));
+            $encounter->update($request->input());
 
-            // Update region relations
-            $regions = $request->get('regions');
-            $encounter->regions()->sync($regions);
+            $encounter->regions()->sync($request->get('regions'));
 
-            // Update enemy relations
-            $enemies = $request->get('enemies');
-            $encounter->enemies()->sync($enemies);
+            $encounter->enemies()->sync($request->get('enemies'));
 
             return Response($encounter, 200);
         } catch (ValidationException $e) {
