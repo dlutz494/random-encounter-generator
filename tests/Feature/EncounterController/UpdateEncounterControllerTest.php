@@ -16,6 +16,8 @@ class UpdateEncounterControllerTest extends TestCase
     use RefreshDatabase;
 
     protected Encounter $encounter;
+    protected array $regions = [];
+    protected array $enemies = [];
 
     public function test_it_updates_an_encounter() : void
     {
@@ -74,6 +76,20 @@ class UpdateEncounterControllerTest extends TestCase
         $response->assertSuccessful();
     }
 
+    public function test_it_returns_success_with_valid_regions() : void
+    {
+        $response = $this->getResponse(['regions' => $this->regions]);
+
+        $response->assertSuccessful();
+    }
+
+    public function test_it_returns_success_with_valid_enemies() : void
+    {
+        $response = $this->getResponse(['enemies' => $this->enemies]);
+
+        $response->assertSuccessful();
+    }
+
     /**
      * @dataProvider ProvidesInvalidPayloads
      */
@@ -89,8 +105,6 @@ class UpdateEncounterControllerTest extends TestCase
         $name = 'Update encounter';
         $description = 'A test encounter';
         $difficulty = 'Trivial';
-        $regions = [];
-        $enemies = [];
 
         return [
             'Name only'        => [
@@ -108,23 +122,11 @@ class UpdateEncounterControllerTest extends TestCase
                     'difficulty' => $difficulty,
                 ],
             ],
-            'Regions only'     => [
-                'payload' => [
-                    'regions' => $regions,
-                ],
-            ],
-            'Enemies only'     => [
-                'payload' => [
-                    'enemies' => $enemies,
-                ],
-            ],
             'All fields'       => [
                 'payload' => [
                     'name'        => $name,
                     'description' => $description,
                     'difficulty'  => $difficulty,
-                    'regions'     => $regions,
-                    'enemies'     => $enemies,
                 ],
             ],
         ];
@@ -132,11 +134,6 @@ class UpdateEncounterControllerTest extends TestCase
 
     public function ProvidesInvalidPayloads() : array
     {
-        $validName = 'Update Encounter';
-        $validDescription = 'A test encounter';
-        $validDifficulty = 'Trivial';
-        $validRegions = [];
-        $validEnemies = [];
         return [
             'Name is an integer'        => [
                 'payload' => [
@@ -196,6 +193,16 @@ class UpdateEncounterControllerTest extends TestCase
     protected function setUp() : void
     {
         parent::setUp();
+
+        $this->enemies = [];
+        foreach (Enemy::factory(3)->create() as $enemy) {
+            $this->enemies[] = $enemy->getKey();
+        }
+
+        $this->regions = [];
+        foreach (Region::factory(3)->create() as $region) {
+            $this->regions[] = $region->getKey();
+        }
 
         $this->encounter = Encounter::factory()->create();
         EncounterRegion::factory()->withEncounter($this->encounter)->create();
