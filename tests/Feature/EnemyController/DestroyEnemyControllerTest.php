@@ -4,8 +4,6 @@ namespace Tests\Feature\EnemyController;
 
 use App\Models\Enemy;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
-use Symfony\Component\Routing\Exception\MethodNotAllowedException;
 use Tests\TestCase;
 
 class DestroyEnemyControllerTest extends TestCase
