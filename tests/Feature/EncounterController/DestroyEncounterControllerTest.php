@@ -18,15 +18,7 @@ class DestroyEncounterControllerTest extends TestCase
     {
         $region = Region::factory()->create();
         $enemy = Enemy::factory()->create();
-        $encounter = Encounter::factory()->create();
-        EncounterRegion::factory()->create([
-            'encounter_id' => $encounter->getKey(),
-            'region_id'    => $region->getKey(),
-        ]);
-        EncounterEnemy::factory()->create([
-            'encounter_id' => $encounter->getKey(),
-            'enemy_id'     => $enemy->getKey(),
-        ]);
+        $encounter = Encounter::factory()->hasAttached($region)->hasAttached($enemy)->create();
 
         $this->assertDatabaseHas('encounters', $encounter->toArray());
         $this->assertDatabaseHas('encounter_region', ['encounter_id' => $encounter->getKey()]);
