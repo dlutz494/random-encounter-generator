@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
 
-class RegionController extends Controller
+class RegionResourceController extends Controller
 {
     public function index() : Collection
     {

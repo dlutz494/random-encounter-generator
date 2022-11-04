@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\Feature\RegionController;
+namespace Tests\Feature\RegionResourceController;
 
 use App\Models\Region;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class DestroyRegionControllerTest extends TestCase
+class DestroyRegionResourceControllerTest extends TestCase
 {
     use RefreshDatabase;
 

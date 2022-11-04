@@ -5,7 +5,7 @@ namespace Tests\Feature\EnvironmentController;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class StoreEnvironmentControllerTest extends TestCase
+class StoreEnvironmentResourceControllerTest extends TestCase
 {
     use RefreshDatabase;
 

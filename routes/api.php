@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\EncounterController;
-use App\Http\Controllers\EnemyController;
-use App\Http\Controllers\EnvironmentController;
-use App\Http\Controllers\RegionController;
+use App\Http\Controllers\EncounterResourceController;
+use App\Http\Controllers\EnemyResourceController;
+use App\Http\Controllers\EnvironmentResourceController;
+use App\Http\Controllers\RegionResourceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('region', RegionController::class);
-Route::apiResource('environment', EnvironmentController::class);
-Route::apiResource('enemy', EnemyController::class);
-Route::apiResource('encounter', EncounterController::class);
+Route::apiResource('region', RegionResourceController::class);
+Route::apiResource('environment', EnvironmentResourceController::class);
+Route::apiResource('enemy', EnemyResourceController::class);
+Route::apiResource('encounter', EncounterResourceController::class);

@@ -6,7 +6,7 @@ use App\Models\Environment;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class IndexEnvironmentControllerTest extends TestCase
+class IndexEnvironmentResourceControllerTest extends TestCase
 {
     use RefreshDatabase;
 

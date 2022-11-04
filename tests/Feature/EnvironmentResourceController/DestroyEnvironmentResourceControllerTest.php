@@ -6,7 +6,7 @@ use App\Models\Environment;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class DestroyEnvironmentControllerTest extends TestCase
+class DestroyEnvironmentResourceControllerTest extends TestCase
 {
     use RefreshDatabase;
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace Tests\Feature\EnemyController;
+namespace Tests\Feature\EnemyResourceController;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class StoreEnemyControllerTest extends TestCase
+class StoreEnemyResourceControllerTest extends TestCase
 {
     use RefreshDatabase;
 

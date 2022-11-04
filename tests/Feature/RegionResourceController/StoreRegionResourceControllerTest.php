@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Feature\RegionController;
+namespace Tests\Feature\RegionResourceController;
 
 use App\Models\Environment;
 use App\Models\Region;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class StoreRegionControllerTest extends TestCase
+class StoreRegionResourceControllerTest extends TestCase
 {
     use RefreshDatabase;
 

@@ -1,16 +1,14 @@
 <?php
 
-namespace Tests\Feature\EncounterController;
+namespace Tests\Feature\EncounterResourceController;
 
 use App\Models\Encounter;
-use App\Models\EncounterEnemy;
-use App\Models\EncounterRegion;
 use App\Models\Enemy;
 use App\Models\Region;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class DestroyEncounterControllerTest extends TestCase
+class DestroyEncounterResourceControllerTest extends TestCase
 {
     use RefreshDatabase;
 

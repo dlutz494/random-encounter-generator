@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\EncounterController;
+namespace Tests\Feature\EncounterResourceController;
 
 use App\Models\Encounter;
 use App\Models\Enemy;
@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
-class StoreEncounterControllerTest extends TestCase
+class StoreEncounterResourceControllerTest extends TestCase
 {
     use RefreshDatabase;
 

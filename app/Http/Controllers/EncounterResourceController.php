@@ -13,7 +13,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
 
-class EncounterController extends Controller
+class EncounterResourceController extends Controller
 {
     public function index() : AnonymousResourceCollection
     {

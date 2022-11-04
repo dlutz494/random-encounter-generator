@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
 
-class EnemyController extends Controller
+class EnemyResourceController extends Controller
 {
     public function index() : Collection
     {
