@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\EnvironmentResource;
+use App\Http\Requests\StoreEnvironmentRequest;
 use App\Models\Environment;
+use Exception;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Http;
 use Illuminate\View\View;
 
 class EnvironmentController extends Controller
@@ -19,18 +24,19 @@ class EnvironmentController extends Controller
 
     public function create() : View
     {
-        //
+        return view('environment.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param Request $request
-     * @return Response
-     */
-    public function store(Request $request)
+    public function store(StoreEnvironmentRequest $request) : Redirector|Application|RedirectResponse
     {
-        //
+        try {
+            Environment::create($request->all());
+
+            return redirect('environment.index', 200);
+        } catch (Exception $e) {
+            return redirect('environment.create', 400);
+        }
+
     }
 
     public function show(Environment $environment) : View
@@ -40,15 +46,11 @@ class EnvironmentController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param Environment $environment
-     * @return Response
-     */
-    public function edit(Environment $environment)
+    public function edit(Environment $environment) : View
     {
-        //
+        return view('environment.edit', [
+            'environment' => $environment,
+        ]);
     }
 
     /**
