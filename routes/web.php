@@ -20,5 +20,8 @@ Route::get('/', function () {
 
 Route::controller(EnvironmentController::class)->group(function () {
     Route::get('/environment', 'index');
+    Route::post('/environment', 'store');
+    Route::get('/environment/create', 'create');
     Route::get('/environment/{environment}', 'show');
+    Route::get('/environment/{environment}/edit', 'edit');
 });
