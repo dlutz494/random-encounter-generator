@@ -17,6 +17,7 @@
         </style>
     </head>
     <body class="antialiased">
+        <a href="/">Home</a>
         <h1>Show</h1>
         <p>ID: {{ $environment->id }}</p>
         <p>Name: {{ $environment->name }}</p>

@@ -17,6 +17,7 @@
         </style>
     </head>
     <body class="antialiased">
+        <a href="/">Home</a>
         <h1>Edit</h1>
         <form>
             <label for="name"></label>

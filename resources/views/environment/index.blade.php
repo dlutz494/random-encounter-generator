@@ -17,10 +17,14 @@
         </style>
     </head>
     <body class="antialiased">
+        <a href="/">Home</a>
         <h1>Index</h1>
+        <a href="environment/create">New Environment</a>
+        <br>
         @foreach($environments as $environment)
-        <p>ID: {{ $environment->id }}</p>
-        <p>Name: {{ $environment->name }}</p>
+            <a href="environment/{{ $environment->getKey() }}">View</a>
+            <p>ID: {{ $environment->getKey() }}</p>
+            <p>Name: {{ $environment->name }}</p>
             <br>
         @endforeach
     </body>
