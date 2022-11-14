@@ -19,10 +19,12 @@
     <body class="antialiased">
         <a href="/">Home</a>
         <h1>Edit</h1>
-        <form>
-            <label for="name"></label>
-            <input id="name" type="text" value="{{ $environment->name }}">
-            <input type="submit" value="Submit">
+        <form method="POST" action="/environment/{{ $environment->getKey() }}/update">
+            @csrf
+            @method('PATCH')
+            <label for="name">Name: </label>
+            <input id="name" name="name" type="text" value="{{ $environment->name }}">
+            <input type="submit">
         </form>
     </body>
 </html>

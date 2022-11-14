@@ -32,7 +32,7 @@ class EnvironmentController extends Controller
         try {
             Environment::create($request->all());
 
-            return redirect('environment.index', 200);
+            return redirect('environment', 200);
         } catch (Exception $e) {
             return redirect('environment.create', 400);
         }
@@ -53,16 +53,11 @@ class EnvironmentController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param Request $request
-     * @param Environment $environment
-     * @return Response
-     */
-    public function update(Request $request, Environment $environment)
+    public function update(Request $request, Environment $environment) : Redirector|Application|RedirectResponse
     {
-        //
+        $environment->update($request->all());
+        return redirect('environment');
+
     }
 
     /**

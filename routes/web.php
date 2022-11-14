@@ -24,4 +24,5 @@ Route::controller(EnvironmentController::class)->group(function () {
     Route::get('/environment/create', 'create');
     Route::get('/environment/{environment}', 'show');
     Route::get('/environment/{environment}/edit', 'edit');
+    Route::patch('/environment/{environment}/update', 'update');
 });
