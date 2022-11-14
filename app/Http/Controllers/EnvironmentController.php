@@ -32,7 +32,7 @@ class EnvironmentController extends Controller
         try {
             Environment::create($request->all());
 
-            return redirect('environment', 200);
+            return redirect('environment');
         } catch (Exception $e) {
             return redirect('environment.create', 400);
         }
@@ -57,7 +57,6 @@ class EnvironmentController extends Controller
     {
         $environment->update($request->all());
         return redirect('environment');
-
     }
 
     /**

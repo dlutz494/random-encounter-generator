@@ -22,6 +22,6 @@
         <p>ID: {{ $environment->id }}</p>
         <p>Name: {{ $environment->name }}</p>
         <br>
-        <a href="/environment/edit/{{ $environment->getKey() }}">Edit</a>
+        <a href="/environment/{{ $environment->getKey() }}/edit">Edit</a>
     </body>
 </html>

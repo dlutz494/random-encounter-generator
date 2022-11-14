@@ -19,9 +19,10 @@
     <body class="antialiased">
         <a href="/">Home</a>
         <h1>Create</h1>
-        <form method="post" action="/environment">
+        <form method="POST" action="/environment">
+            @csrf
             <label for="name">Name: </label>
-            <input id="name" type="text">
+            <input id="name" name="name" type="text">
             <input type="submit" value="Submit">
         </form>
     </body>
