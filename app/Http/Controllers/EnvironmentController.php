@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEnvironmentRequest;
+use App\Http\Requests\UpdateEnvironmentRequest;
 use App\Models\Environment;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\View\View;
 
@@ -51,7 +51,7 @@ class EnvironmentController extends Controller
         ]);
     }
 
-    public function update(Request $request, Environment $environment) : Redirector|Application|RedirectResponse
+    public function update(UpdateEnvironmentRequest $request, Environment $environment) : Redirector|Application|RedirectResponse
     {
         $environment->update($request->all());
 
