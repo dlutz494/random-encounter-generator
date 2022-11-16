@@ -23,5 +23,10 @@
         <p>Name: {{ $environment->name }}</p>
         <br>
         <a href="/environment/{{ $environment->getKey() }}/edit">Edit</a>
+        <form action="/environment/{{ $environment->getKey() }}/delete" method="POST">
+            @csrf
+            @method('DELETE')
+            <input type="submit" value="Delete">
+        </form>
     </body>
 </html>
