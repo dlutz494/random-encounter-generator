@@ -25,4 +25,5 @@ Route::controller(EnvironmentController::class)->group(function () {
     Route::get('/environment/{environment}', 'show');
     Route::get('/environment/{environment}/edit', 'edit');
     Route::patch('/environment/{environment}/update', 'update');
+    Route::delete('/environment/{environment}/delete', 'destroy');
 });
