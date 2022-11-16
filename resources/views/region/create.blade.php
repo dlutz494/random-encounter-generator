@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+@php use App\Models\Environment; @endphp
+    <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -23,6 +24,13 @@
             @csrf
             <label for="name">Name: </label>
             <input id="name" name="name" type="text">
+            <br>
+            <label for="environment">Environment: </label>
+            <select id="environment" name="environment">
+                @foreach(Environment::all() as $environment)
+                    <option value="{{ $environment->getKey() }}">{{ $environment->name }}</option>
+                @endforeach
+            </select>
             <input type="submit" value="Submit">
         </form>
     </body>

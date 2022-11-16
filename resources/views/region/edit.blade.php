@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+@php use App\Models\Environment; @endphp
+    <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -24,6 +25,18 @@
             @method('PATCH')
             <label for="name">Name: </label>
             <input id="name" name="name" type="text" value="{{ $region->name }}">
+            <br>
+            <label for="environment">Environment: </label>
+            <select id="environment" name="environment">
+                @foreach(Environment::all() as $environment)
+                    @if($environment->getKey() == $region->environment)
+                        <option value="{{ $environment->getKey() }}" selected>{{ $environment->name }}</option>
+                    @else
+                        <option value="{{ $environment->getKey() }}">{{ $environment->name }}</option>
+                    @endif
+                @endforeach
+            </select>
+            <br>
             <input type="submit">
         </form>
     </body>
