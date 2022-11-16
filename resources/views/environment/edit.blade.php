@@ -24,6 +24,7 @@
             @method('PATCH')
             <label for="name">Name: </label>
             <input id="name" name="name" type="text" value="{{ $environment->name }}">
+            <br>
             <input type="submit">
         </form>
     </body>
