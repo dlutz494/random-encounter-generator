@@ -21,7 +21,8 @@ class RegionResourceController extends Controller
     public function store(StoreRegionRequest $request) : Response
     {
         try {
-            Region::create($request->all());
+            $region = new Region($request->all());
+            $region->save();
 
             return Response('Region stored successfully', 200);
         } catch (ValidationException $e) {

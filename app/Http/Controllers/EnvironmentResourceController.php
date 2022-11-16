@@ -21,7 +21,8 @@ class EnvironmentResourceController extends Controller
     public function store(StoreEnvironmentRequest $request) : Response
     {
         try {
-            Environment::create($request->all());
+            $environment = new Environment($request->all());
+            $environment->save();
 
             return Response('Environment stored successfully', 200);
         } catch (Exception $e) {
@@ -36,7 +37,7 @@ class EnvironmentResourceController extends Controller
 
     public function show(Environment $environment) : EnvironmentResource
     {
-        return EnvironmentResource::make(Environment::findOrFail($environment->getKey()));
+        return EnvironmentResource::make($environment);
     }
 
     public function edit(Environment $environment) : Response
