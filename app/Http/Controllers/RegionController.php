@@ -37,30 +37,30 @@ class RegionController extends Controller
         }
     }
 
-    public function show(Region $environment) : View
+    public function show(Region $region) : View
     {
         return view('region.show', [
-            'region' => $environment,
+            'region' => $region,
         ]);
     }
 
-    public function edit(Region $environment) : View
+    public function edit(Region $region) : View
     {
         return view('region.edit', [
-            'region' => $environment,
+            'region' => $region,
         ]);
     }
 
-    public function update(Request $request, Region $environment) : Redirector|Application|RedirectResponse
+    public function update(Request $request, Region $region) : Redirector|Application|RedirectResponse
     {
-        $environment->update($request->all());
+        $region->update($request->all());
 
         return redirect('region');
     }
 
-    public function destroy(Region $environment) : Redirector|Application|RedirectResponse
+    public function destroy(Region $region) : Redirector|Application|RedirectResponse
     {
-        Region::destroy($environment->getKey());
+        Region::destroy($region->getKey());
 
         return redirect('region');
     }
