@@ -8,9 +8,7 @@ use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
-use Illuminate\Support\Facades\Http;
 use Illuminate\View\View;
 
 class EnvironmentController extends Controller
@@ -30,13 +28,13 @@ class EnvironmentController extends Controller
     public function store(StoreEnvironmentRequest $request) : Redirector|Application|RedirectResponse
     {
         try {
-            Environment::create($request->all());
+            $environment = new Environment($request->all());
+            $environment->save();
 
             return redirect('environment');
         } catch (Exception $e) {
             return redirect('environment.create', 400);
         }
-
     }
 
     public function show(Environment $environment) : View
@@ -56,17 +54,14 @@ class EnvironmentController extends Controller
     public function update(Request $request, Environment $environment) : Redirector|Application|RedirectResponse
     {
         $environment->update($request->all());
+
         return redirect('environment');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param Environment $environment
-     * @return Response
-     */
-    public function destroy(Environment $environment)
+    public function destroy(Environment $environment) : Redirector|Application|RedirectResponse
     {
-        //
+        Environment::destroy($environment->getKey());
+
+        return redirect('environment');
     }
 }
