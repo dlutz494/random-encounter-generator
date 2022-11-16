@@ -20,6 +20,7 @@
         </style>
     </head>
     <body class="antialiased">
-        <a href="environment">Environments</a>
+        <a href="environment">Environments</a><br>
+        <a href="region">Regions</a><br>
     </body>
 </html>
