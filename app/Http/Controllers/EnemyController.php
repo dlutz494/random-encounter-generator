@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreEnemyRequest;
+use App\Http\Requests\UpdateEnemyRequest;
 use App\Models\Enemy;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 
 class EnemyController extends Controller
@@ -27,7 +28,7 @@ class EnemyController extends Controller
         ]);
     }
 
-    public function store(Request $request) : Redirector|Application|RedirectResponse
+    public function store(StoreEnemyRequest $request) : Redirector|Application|RedirectResponse
     {
         try {
             $enemy = new Enemy($request->all());
@@ -53,7 +54,7 @@ class EnemyController extends Controller
         ]);
     }
 
-    public function update(Request $request, Enemy $enemy) : Redirector|Application|RedirectResponse
+    public function update(UpdateEnemyRequest $request, Enemy $enemy) : Redirector|Application|RedirectResponse
     {
         $enemy->update($request->all());
 
