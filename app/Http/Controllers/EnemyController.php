@@ -23,9 +23,7 @@ class EnemyController extends Controller
 
     public function create() : View
     {
-        return view('enemy.create', [
-            'enemies' => Enemy::all(),
-        ]);
+        return view('enemy.create');
     }
 
     public function store(StoreEnemyRequest $request) : Redirector|Application|RedirectResponse
