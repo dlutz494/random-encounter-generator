@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EnemyController;
 use App\Http\Controllers\EnvironmentController;
 use App\Http\Controllers\RegionController;
 use Illuminate\Support\Facades\Route;
@@ -37,4 +38,14 @@ Route::controller(RegionController::class)->group(function () {
     Route::post('/region', 'store');
     Route::patch('/region/{region}/update', 'update');
     Route::delete('/region/{region}/delete', 'destroy');
+});
+
+Route::controller(EnemyController::class)->group(function () {
+    Route::get('/enemy', 'index');
+    Route::get('/enemy/create', 'create');
+    Route::get('/enemy/{enemy}', 'show');
+    Route::get('/enemy/{enemy}/edit', 'edit');
+    Route::post('/enemy', 'store');
+    Route::patch('/enemy/{enemy}/update', 'update');
+    Route::delete('/enemy/{enemy}/delete', 'destroy');
 });
