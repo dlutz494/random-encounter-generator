@@ -4,15 +4,12 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Encounter Create</title>
 
         <!-- Fonts -->
         <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
         <!-- Styles -->
-        <style>
-        </style>
-
         <style>
             body {
                 font-family: 'Nunito', sans-serif;
@@ -20,9 +17,13 @@
         </style>
     </head>
     <body class="antialiased">
-        <a href="environment">Environments</a><br>
-        <a href="region">Regions</a><br>
-        <a href="enemy">Enemies</a><br>
-        <a href="encounter">Encounters</a><br>
+        <a href="/">Home</a>
+        <h1>Create</h1>
+        <form method="POST" action="/encounter">
+            @csrf
+            <label for="name">Name: </label>
+            <input id="name" name="name" type="text"><br>
+            <input type="submit" value="Submit">
+        </form>
     </body>
 </html>
