@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EncounterController;
 use App\Http\Controllers\EnemyController;
 use App\Http\Controllers\EnvironmentController;
 use App\Http\Controllers\RegionController;
@@ -48,4 +49,14 @@ Route::controller(EnemyController::class)->group(function () {
     Route::post('/enemy', 'store');
     Route::patch('/enemy/{enemy}/update', 'update');
     Route::delete('/enemy/{enemy}/delete', 'destroy');
+});
+
+Route::controller(EncounterController::class)->group(function () {
+    Route::get('/encounter', 'index');
+    Route::get('/encounter/create', 'create');
+    Route::get('/encounter/{encounter}', 'show');
+    Route::get('/encounter/{encounter}/edit', 'edit');
+    Route::post('/encounter', 'store');
+    Route::patch('/encounter/{encounter}/update', 'update');
+    Route::delete('/encounter/{encounter}/delete', 'destroy');
 });
