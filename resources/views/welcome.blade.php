@@ -22,5 +22,6 @@
     <body class="antialiased">
         <a href="environment">Environments</a><br>
         <a href="region">Regions</a><br>
+        <a href="enemy">Enemies</a><br>
     </body>
 </html>
