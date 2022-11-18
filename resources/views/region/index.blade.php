@@ -1,5 +1,4 @@
-@php use App\Models\Environment; @endphp
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -26,7 +25,7 @@
             <a href="region/{{ $region->getKey() }}">View</a>
             <p>ID: {{ $region->getKey() }}</p>
             <p>Name: {{ $region->name }}</p>
-            <p>Environment: {{ Environment::find($region->environment)->name }}</p>
+            <p>Environment: {{ $environments->find($region->environment)->name }}</p>
             <br>
         @endforeach
     </body>

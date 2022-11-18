@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreRegionRequest;
+use App\Models\Environment;
 use App\Models\Region;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
@@ -16,20 +17,23 @@ class RegionController extends Controller
     public function index() : View
     {
         return view('region.index', [
-            'regions' => Region::all(),
+            'regions'      => Region::all(),
+            'environments' => Environment::all(),
         ]);
     }
 
     public function create() : View
     {
-        return view('region.create');
+        return view('region.create', [
+            'environments' => Environment::all(),
+        ]);
     }
 
     public function store(StoreRegionRequest $request) : Redirector|Application|RedirectResponse
     {
         try {
-            $environment = new Region($request->all());
-            $environment->save();
+            $region = new Region($request->all());
+            $region->save();
 
             return redirect('region');
         } catch (Exception $e) {
@@ -39,15 +43,19 @@ class RegionController extends Controller
 
     public function show(Region $region) : View
     {
+        $environment = Environment::find($region->environment);
+
         return view('region.show', [
-            'region' => $region,
+            'region'      => $region,
+            'environment' => $environment,
         ]);
     }
 
     public function edit(Region $region) : View
     {
         return view('region.edit', [
-            'region' => $region,
+            'region'       => $region,
+            'environments' => Environment::all(),
         ]);
     }
 

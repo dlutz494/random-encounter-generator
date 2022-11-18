@@ -1,5 +1,4 @@
-@php use App\Models\Environment; @endphp
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -28,7 +27,7 @@
             <br>
             <label for="environment">Environment: </label>
             <select id="environment" name="environment">
-                @foreach(Environment::all() as $environment)
+                @foreach($environments as $environment)
                     @if($environment->getKey() == $region->environment)
                         <option value="{{ $environment->getKey() }}" selected>{{ $environment->name }}</option>
                     @else

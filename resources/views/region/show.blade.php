@@ -1,5 +1,4 @@
-@php use App\Models\Environment; @endphp
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -22,7 +21,7 @@
         <h1>Show</h1>
         <p>ID: {{ $region->id }}</p>
         <p>Name: {{ $region->name }}</p>
-        <p>Environment: {{ Environment::find($region->environment)->name }}</p>
+        <p>Environment: {{ $environment->name }}</p>
         <a href="/region/{{ $region->getKey() }}/edit">Edit</a>
         <form action="/region/{{ $region->getKey() }}/delete" method="POST">
             @csrf
