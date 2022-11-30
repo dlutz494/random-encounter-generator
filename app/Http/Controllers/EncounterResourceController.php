@@ -22,28 +22,23 @@ class EncounterResourceController extends Controller
 
     public function store(StoreEncounterRequest $request) : Response|string
     {
-        // Refactor this to use 'attach' instead of creating pivot records directly
         try {
-            $encounter = $request->all(['name', 'description', 'difficulty']);
+            $encounter = new Encounter();
+            $encounter->name = $request->get('name');
+            $encounter->description = $request->get('description');
+            $encounter->difficulty = $request->get('difficulty');
+            $encounter->save();
 
-            $createdEncounter = Encounter::create($encounter);
             $regions = $request->get('regions');
             foreach ($regions as $region) {
-                EncounterRegion::create([
-                    'encounter_id' => $createdEncounter->getKey(),
-                    'region_id'    => $region['id'],
-                ]);
+                $encounter->regions()->attach($region['id']);
             }
-
             $enemies = $request->get('enemies');
             foreach ($enemies as $enemy) {
-                EncounterEnemy::create([
-                    'encounter_id' => $createdEncounter->getKey(),
-                    'enemy_id'     => $enemy['id'],
-                    'quantity'     => 1,
-                ]);
+                $encounter->enemies()->attach($enemy['id']);
             }
 
+            $encounter->save();
             return Response('Enemy stored successfully', 200);
         } catch (ValidationException $e) {
             return Response($e->getMessage());
