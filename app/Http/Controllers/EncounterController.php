@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreEncounterRequest;
 use App\Http\Requests\UpdateEncounterRequest;
 use App\Models\Encounter;
-use App\Models\EncounterEnemy;
-use App\Models\EncounterRegion;
+use App\Traits\EncounterOperations;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -16,6 +15,8 @@ use Illuminate\Routing\Redirector;
 
 class EncounterController extends Controller
 {
+    use EncounterOperations;
+
     public function index() : Factory|View|Application
     {
         return view('encounter.index', [
@@ -33,22 +34,7 @@ class EncounterController extends Controller
     public function store(StoreEncounterRequest $request) : Redirector|Application|RedirectResponse
     {
         try {
-            $encounter = new Encounter();
-            $encounter->name = $request->get('name');
-            $encounter->description = $request->get('description');
-            $encounter->difficulty = $request->get('difficulty');
-            $encounter->save();
-
-            $regions = $request->get('regions');
-            foreach ($regions as $region) {
-                $encounter->regions()->attach($region['id']);
-            }
-            $enemies = $request->get('enemies');
-            foreach ($enemies as $enemy) {
-                $encounter->enemies()->attach($enemy['id']);
-            }
-
-            $encounter->save();
+            $this->storeEncounter($request);
 
             return redirect('encounter');
         } catch (Exception $e) {
@@ -70,8 +56,10 @@ class EncounterController extends Controller
         ]);
     }
 
-    public function update(UpdateEncounterRequest $request, Encounter $encounter) : Redirector|Application|RedirectResponse
-    {
+    public function update(
+        UpdateEncounterRequest $request,
+        Encounter $encounter
+    ) : Redirector|Application|RedirectResponse {
         $encounter->update($request->all());
 
         return redirect('encounter');

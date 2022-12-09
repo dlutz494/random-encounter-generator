@@ -6,8 +6,7 @@ use App\Http\Requests\StoreEncounterRequest;
 use App\Http\Requests\UpdateEncounterRequest;
 use App\Http\Resources\EncounterResource;
 use App\Models\Encounter;
-use App\Models\EncounterEnemy;
-use App\Models\EncounterRegion;
+use App\Traits\EncounterOperations;
 use Exception;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
@@ -15,6 +14,8 @@ use Illuminate\Validation\ValidationException;
 
 class EncounterResourceController extends Controller
 {
+    use EncounterOperations;
+
     public function index() : AnonymousResourceCollection
     {
         return EncounterResource::collection(Encounter::all());
@@ -23,22 +24,8 @@ class EncounterResourceController extends Controller
     public function store(StoreEncounterRequest $request) : Response|string
     {
         try {
-            $encounter = new Encounter();
-            $encounter->name = $request->get('name');
-            $encounter->description = $request->get('description');
-            $encounter->difficulty = $request->get('difficulty');
-            $encounter->save();
+            $this->storeEncounter($request);
 
-            $regions = $request->get('regions');
-            foreach ($regions as $region) {
-                $encounter->regions()->attach($region['id']);
-            }
-            $enemies = $request->get('enemies');
-            foreach ($enemies as $enemy) {
-                $encounter->enemies()->attach($enemy['id']);
-            }
-
-            $encounter->save();
             return Response('Enemy stored successfully', 200);
         } catch (ValidationException $e) {
             return Response($e->getMessage());
