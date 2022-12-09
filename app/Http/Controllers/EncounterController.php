@@ -60,7 +60,7 @@ class EncounterController extends Controller
         UpdateEncounterRequest $request,
         Encounter $encounter
     ) : Redirector|Application|RedirectResponse {
-        $encounter->update($request->all());
+        $this->updateEncounter($request, $encounter);
 
         return redirect('encounter');
     }

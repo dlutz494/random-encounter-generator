@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Http\Requests\StoreEncounterRequest;
+use App\Http\Requests\UpdateEncounterRequest;
 use App\Models\Encounter;
 
 trait EncounterOperations
@@ -23,6 +24,17 @@ trait EncounterOperations
         foreach ($enemies as $enemy) {
             $encounter->enemies()->attach($enemy['id']);
         }
+
+        $encounter->save();
+    }
+
+    public function updateEncounter(UpdateEncounterRequest $request, Encounter $encounter) : void
+    {
+        $encounter->update($request->input());
+
+        $encounter->regions()->sync($request->get('regions'));
+
+        $encounter->enemies()->sync($request->get('enemies'));
 
         $encounter->save();
     }

@@ -52,11 +52,7 @@ class EncounterResourceController extends Controller
     public function update(UpdateEncounterRequest $request, Encounter $encounter) : Response
     {
         try {
-            $encounter->update($request->input());
-
-            $encounter->regions()->sync($request->get('regions'));
-
-            $encounter->enemies()->sync($request->get('enemies'));
+            $this->updateEncounter($request, $encounter);
 
             return Response($encounter, 200);
         } catch (ValidationException $e) {
