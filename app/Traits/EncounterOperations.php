@@ -16,12 +16,10 @@ trait EncounterOperations
         $encounter->difficulty = $request->get('difficulty');
         $encounter->save();
 
-        $regions = $request->get('regions');
-        foreach ($regions as $region) {
+        foreach ($request->get('regions') as $region) {
             $encounter->regions()->attach($region['id']);
         }
-        $enemies = $request->get('enemies');
-        foreach ($enemies as $enemy) {
+        foreach ($request->get('enemies') as $enemy) {
             $encounter->enemies()->attach($enemy['id']);
         }
 
