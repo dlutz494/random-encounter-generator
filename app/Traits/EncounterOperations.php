@@ -25,7 +25,7 @@ trait EncounterOperations
             $encounter->enemies()->attach($enemy['id']);
         }
 
-        $encounter->save();
+        $encounter->push();
     }
 
     public function updateEncounter(UpdateEncounterRequest $request, Encounter $encounter) : void
@@ -36,6 +36,6 @@ trait EncounterOperations
 
         $encounter->enemies()->sync($request->get('enemies'));
 
-        $encounter->save();
+        $encounter->push();
     }
 }
