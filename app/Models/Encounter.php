@@ -30,6 +30,11 @@ class Encounter extends Model
         'difficulty'  => 'string',
     ];
 
+    protected $attributes = [
+        'description' => 'An encounter.',
+        'difficulty'  => 'Trivial',
+    ];
+
     public function regions() : BelongsToMany
     {
         return $this->belongsToMany(Region::class, 'encounter_region')->withTimestamps();

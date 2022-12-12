@@ -16,4 +16,8 @@ class Environment extends Model
     protected $fillable = [
         'name',
     ];
+
+    protected $attributes = [
+        'name' => 'Forest',
+    ];
 }

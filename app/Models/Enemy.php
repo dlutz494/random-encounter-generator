@@ -22,6 +22,11 @@ class Enemy extends Model
         'challenge_rating',
     ];
 
+    protected $attributes = [
+        'statblock'        => 'www.dndbeyond.com',
+        'challenge_rating' => '1/8',
+    ];
+
     protected $hidden = [
         'pivot',
     ];
