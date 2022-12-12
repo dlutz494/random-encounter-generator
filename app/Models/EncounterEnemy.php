@@ -18,6 +18,10 @@ class EncounterEnemy extends Model
         'quantity',
     ];
 
+    protected $attributes = [
+        'quantity' => 1,
+    ];
+
     public function encounter() : BelongsTo
     {
         return $this->belongsTo(Encounter::class);
