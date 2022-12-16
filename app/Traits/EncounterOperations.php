@@ -20,7 +20,7 @@ trait EncounterOperations
             $encounter->regions()->attach($region['id']);
         }
         foreach ($request->get('enemies') as $enemy) {
-            $encounter->enemies()->attach($enemy['id']);
+            $encounter->enemies()->attach($enemy['enemy']['id'], ['quantity' => $enemy['quantity']]);
         }
 
         $encounter->push();

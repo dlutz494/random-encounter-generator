@@ -42,6 +42,7 @@ class Encounter extends Model
 
     public function enemies() : BelongsToMany
     {
-        return $this->belongsToMany(Enemy::class, 'encounter_enemy')->withTimestamps();
+        return $this->belongsToMany(Enemy::class)->using(EncounterEnemy::class)
+            ->withPivot('quantity')->withTimestamps();
     }
 }

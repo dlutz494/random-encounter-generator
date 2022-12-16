@@ -18,7 +18,8 @@ class StoreEncounterResourceControllerTest extends TestCase
     private string $description;
     private string $difficulty;
     private Region|Collection $regions;
-    private Enemy|Collection $enemies;
+    private Enemy|Collection|array $enemies;
+    private int $quantity;
 
     public function test_it_stores_an_encounter_with_all_fields() : void
     {
@@ -46,8 +47,8 @@ class StoreEncounterResourceControllerTest extends TestCase
         foreach ($this->enemies as $enemy) {
             $this->assertDatabaseHas('encounter_enemy', [
                 'encounter_id' => $encounter->getKey(),
-                'enemy_id'     => $enemy->getKey(),
-                'quantity'     => 1,
+                'enemy_id'     => $enemy['enemy']->getKey(),
+                'quantity'     => $this->quantity,
             ]);
         }
     }
@@ -77,8 +78,8 @@ class StoreEncounterResourceControllerTest extends TestCase
         foreach ($this->enemies as $enemy) {
             $this->assertDatabaseHas('encounter_enemy', [
                 'encounter_id' => $encounter->getKey(),
-                'enemy_id'     => $enemy->getKey(),
-                'quantity'     => 1,
+                'enemy_id'     => $enemy['enemy']->getKey(),
+                'quantity'     => $this->quantity,
             ]);
         }
     }
@@ -109,8 +110,8 @@ class StoreEncounterResourceControllerTest extends TestCase
         foreach ($this->enemies as $enemy) {
             $this->assertDatabaseHas('encounter_enemy', [
                 'encounter_id' => $encounter->getKey(),
-                'enemy_id'     => $enemy->getKey(),
-                'quantity'     => 1,
+                'enemy_id'     => $enemy['enemy']->getKey(),
+                'quantity'     => $this->quantity,
             ]);
         }
     }
@@ -167,8 +168,16 @@ class StoreEncounterResourceControllerTest extends TestCase
         $this->name = 'Store Test';
         $this->description = 'A test encounter.';
         $this->difficulty = 'Trivial';
-        $this->regions = Region::factory(1)->create();
-        $this->enemies = Enemy::factory(3)->create();
+        $this->regions = Region::factory(3)->create();
+        $enemies = Enemy::factory(3)->create();
+        $this->enemies = [];
+        $this->quantity = 3;
+        foreach ($enemies as $enemy) {
+            $this->enemies[] = [
+                'enemy'    => $enemy,
+                'quantity' => $this->quantity,
+            ];
+        }
     }
 
 }
